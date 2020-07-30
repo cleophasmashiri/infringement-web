@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="vehicle">
+            <h2><span jhiTranslate="infringementwebApp.vehicle.detail.title">Vehicle</span> {{ vehicle.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="infringementwebApp.vehicle.plateNumber">Plate Number</span></dt>
+                <dd>
+                    <span>{{ vehicle.plateNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.vehicle.make">Make</span></dt>
+                <dd>
+                    <span>{{ vehicle.make }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.vehicle.model">Model</span></dt>
+                <dd>
+                    <span>{{ vehicle.model }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.vehicle.engineNumber">Engine Number</span></dt>
+                <dd>
+                    <span>{{ vehicle.engineNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.vehicle.chassisNumber">Chassis Number</span></dt>
+                <dd>
+                    <span>{{ vehicle.chassisNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.vehicle.color">Color</span></dt>
+                <dd>
+                    <span>{{ vehicle.color }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.vehicle.yearFirstRegistered">Year First Registered</span></dt>
+                <dd>
+                    <span>{{ vehicle.yearFirstRegistered }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.vehicle.driver">Driver</span></dt>
+                <dd>
+                    <div *ngIf="vehicle.driver">
+                        <a [routerLink]="['/driver', vehicle.driver?.id, 'view']">{{ vehicle.driver?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/vehicle', vehicle.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

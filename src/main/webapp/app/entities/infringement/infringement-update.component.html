@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-infringement-heading" jhiTranslate="infringementwebApp.infringement.home.createOrEditLabel">Create or edit a Infringement</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.infringement.processInstanceId" for="field_processInstanceId">Process Instance Id</label>
+                    <input type="text" class="form-control" name="processInstanceId" id="field_processInstanceId"
+                           formControlName="processInstanceId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.infringement.infringementType" for="field_infringementType">Infringement Type</label>
+                    <input type="text" class="form-control" name="infringementType" id="field_infringementType"
+                           formControlName="infringementType"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.infringement.dateDone" for="field_dateDone">Date Done</label>
+                    <div class="d-flex">
+                        <input id="field_dateDone" type="datetime-local" class="form-control" name="dateDone" formControlName="dateDone" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.infringement.doneBy" for="field_doneBy">Done By</label>
+                    <input type="text" class="form-control" name="doneBy" id="field_doneBy"
+                           formControlName="doneBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.infringement.driver" for="field_driver">Driver</label>
+                    <select class="form-control" id="field_driver" name="driver" formControlName="driver">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="driverOption.id === editForm.get('driver')!.value?.id ? editForm.get('driver')!.value : driverOption" *ngFor="let driverOption of drivers; trackBy: trackById">{{ driverOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.infringement.vehicle" for="field_vehicle">Vehicle</label>
+                    <select class="form-control" id="field_vehicle" name="vehicle" formControlName="vehicle">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vehicleOption.id === editForm.get('vehicle')!.value?.id ? editForm.get('vehicle')!.value : vehicleOption" *ngFor="let vehicleOption of vehicles; trackBy: trackById">{{ vehicleOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

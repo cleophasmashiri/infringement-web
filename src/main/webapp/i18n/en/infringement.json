@@ -1,0 +1,29 @@
+{
+  "infringementwebApp": {
+    "infringement": {
+      "home": {
+        "title": "Infringements",
+        "createLabel": "Create a new Infringement",
+        "createOrEditLabel": "Create or edit a Infringement",
+        "notFound": "No Infringements found"
+      },
+      "created": "A new Infringement is created with identifier {{ param }}",
+      "updated": "A Infringement is updated with identifier {{ param }}",
+      "deleted": "A Infringement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Infringement {{ id }}?"
+      },
+      "detail": {
+        "title": "Infringement"
+      },
+      "processInstanceId": "Process Instance Id",
+      "infringementType": "Infringement Type",
+      "dateDone": "Date Done",
+      "doneBy": "Done By",
+      "infringementAction": "Infringement Action",
+      "document": "Document",
+      "driver": "Driver",
+      "vehicle": "Vehicle"
+    }
+  }
+}

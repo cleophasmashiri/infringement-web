@@ -1,0 +1,27 @@
+{
+  "infringementwebApp": {
+    "infringementAction": {
+      "home": {
+        "title": "Infringement Actions",
+        "createLabel": "Create a new Infringement Action",
+        "createOrEditLabel": "Create or edit a Infringement Action",
+        "notFound": "No Infringement Actions found"
+      },
+      "created": "A new Infringement Action is created with identifier {{ param }}",
+      "updated": "A Infringement Action is updated with identifier {{ param }}",
+      "deleted": "A Infringement Action is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Infringement Action {{ id }}?"
+      },
+      "detail": {
+        "title": "Infringement Action"
+      },
+      "processInstanceId": "Process Instance Id",
+      "notes": "Notes",
+      "infringementActionType": "Infringement Action Type",
+      "dateDone": "Date Done",
+      "doneBy": "Done By",
+      "infringement": "Infringement"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="infringement">
+            <h2><span jhiTranslate="infringementwebApp.infringement.detail.title">Infringement</span> {{ infringement.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="infringementwebApp.infringement.processInstanceId">Process Instance Id</span></dt>
+                <dd>
+                    <span>{{ infringement.processInstanceId }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.infringement.infringementType">Infringement Type</span></dt>
+                <dd>
+                    <span>{{ infringement.infringementType }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.infringement.dateDone">Date Done</span></dt>
+                <dd>
+                    <span>{{ infringement.dateDone }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.infringement.doneBy">Done By</span></dt>
+                <dd>
+                    <span>{{ infringement.doneBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.infringement.driver">Driver</span></dt>
+                <dd>
+                    <div *ngIf="infringement.driver">
+                        <a [routerLink]="['/driver', infringement.driver?.id, 'view']">{{ infringement.driver?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.infringement.vehicle">Vehicle</span></dt>
+                <dd>
+                    <div *ngIf="infringement.vehicle">
+                        <a [routerLink]="['/vehicle', infringement.vehicle?.id, 'view']">{{ infringement.vehicle?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/infringement', infringement.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

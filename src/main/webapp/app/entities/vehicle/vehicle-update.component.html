@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-vehicle-heading" jhiTranslate="infringementwebApp.vehicle.home.createOrEditLabel">Create or edit a Vehicle</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.plateNumber" for="field_plateNumber">Plate Number</label>
+                    <input type="text" class="form-control" name="plateNumber" id="field_plateNumber"
+                           formControlName="plateNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.make" for="field_make">Make</label>
+                    <input type="text" class="form-control" name="make" id="field_make"
+                           formControlName="make"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.model" for="field_model">Model</label>
+                    <input type="text" class="form-control" name="model" id="field_model"
+                           formControlName="model"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.engineNumber" for="field_engineNumber">Engine Number</label>
+                    <input type="text" class="form-control" name="engineNumber" id="field_engineNumber"
+                           formControlName="engineNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.chassisNumber" for="field_chassisNumber">Chassis Number</label>
+                    <input type="text" class="form-control" name="chassisNumber" id="field_chassisNumber"
+                           formControlName="chassisNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.color" for="field_color">Color</label>
+                    <input type="text" class="form-control" name="color" id="field_color"
+                           formControlName="color"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.yearFirstRegistered" for="field_yearFirstRegistered">Year First Registered</label>
+                    <input type="text" class="form-control" name="yearFirstRegistered" id="field_yearFirstRegistered"
+                           formControlName="yearFirstRegistered"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="infringementwebApp.vehicle.driver" for="field_driver">Driver</label>
+                    <select class="form-control" id="field_driver" name="driver" formControlName="driver">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="driverOption.id === editForm.get('driver')!.value?.id ? editForm.get('driver')!.value : driverOption" *ngFor="let driverOption of drivers; trackBy: trackById">{{ driverOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="infringementwebApp.vehicle.home.title">Vehicles</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-vehicle" [routerLink]="['/vehicle/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="infringementwebApp.vehicle.home.createLabel">
+            Create a new Vehicle
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="vehicles?.length === 0">
+        <span jhiTranslate="infringementwebApp.vehicle.home.notFound">No vehicles found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="vehicles && vehicles.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="plateNumber"><span jhiTranslate="infringementwebApp.vehicle.plateNumber">Plate Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="make"><span jhiTranslate="infringementwebApp.vehicle.make">Make</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="model"><span jhiTranslate="infringementwebApp.vehicle.model">Model</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="engineNumber"><span jhiTranslate="infringementwebApp.vehicle.engineNumber">Engine Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="chassisNumber"><span jhiTranslate="infringementwebApp.vehicle.chassisNumber">Chassis Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="color"><span jhiTranslate="infringementwebApp.vehicle.color">Color</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="yearFirstRegistered"><span jhiTranslate="infringementwebApp.vehicle.yearFirstRegistered">Year First Registered</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="driver.id"><span jhiTranslate="infringementwebApp.vehicle.driver">Driver</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let vehicle of vehicles ;trackBy: trackId">
+                    <td><a [routerLink]="['/vehicle', vehicle.id, 'view']">{{ vehicle.id }}</a></td>
+                    <td>{{ vehicle.plateNumber }}</td>
+                    <td>{{ vehicle.make }}</td>
+                    <td>{{ vehicle.model }}</td>
+                    <td>{{ vehicle.engineNumber }}</td>
+                    <td>{{ vehicle.chassisNumber }}</td>
+                    <td>{{ vehicle.color }}</td>
+                    <td>{{ vehicle.yearFirstRegistered }}</td>
+                    <td>
+                        <div *ngIf="vehicle.driver">
+                            <a [routerLink]="['/driver', vehicle.driver?.id, 'view']" >{{ vehicle.driver?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/vehicle', vehicle.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/vehicle', vehicle.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(vehicle)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

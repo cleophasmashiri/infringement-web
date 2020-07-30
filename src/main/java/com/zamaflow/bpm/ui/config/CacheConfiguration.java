@@ -51,6 +51,14 @@ public class CacheConfiguration {
             createCache(cm, com.zamaflow.bpm.ui.domain.User.class.getName());
             createCache(cm, com.zamaflow.bpm.ui.domain.Authority.class.getName());
             createCache(cm, com.zamaflow.bpm.ui.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.zamaflow.bpm.ui.domain.Driver.class.getName());
+            createCache(cm, com.zamaflow.bpm.ui.domain.Driver.class.getName() + ".vehicles");
+            createCache(cm, com.zamaflow.bpm.ui.domain.Vehicle.class.getName());
+            createCache(cm, com.zamaflow.bpm.ui.domain.Infringement.class.getName());
+            createCache(cm, com.zamaflow.bpm.ui.domain.Infringement.class.getName() + ".infringementActions");
+            createCache(cm, com.zamaflow.bpm.ui.domain.Infringement.class.getName() + ".documents");
+            createCache(cm, com.zamaflow.bpm.ui.domain.Document.class.getName());
+            createCache(cm, com.zamaflow.bpm.ui.domain.InfringementAction.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

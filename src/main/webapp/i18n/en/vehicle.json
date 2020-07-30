@@ -1,0 +1,29 @@
+{
+  "infringementwebApp": {
+    "vehicle": {
+      "home": {
+        "title": "Vehicles",
+        "createLabel": "Create a new Vehicle",
+        "createOrEditLabel": "Create or edit a Vehicle",
+        "notFound": "No Vehicles found"
+      },
+      "created": "A new Vehicle is created with identifier {{ param }}",
+      "updated": "A Vehicle is updated with identifier {{ param }}",
+      "deleted": "A Vehicle is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Vehicle {{ id }}?"
+      },
+      "detail": {
+        "title": "Vehicle"
+      },
+      "plateNumber": "Plate Number",
+      "make": "Make",
+      "model": "Model",
+      "engineNumber": "Engine Number",
+      "chassisNumber": "Chassis Number",
+      "color": "Color",
+      "yearFirstRegistered": "Year First Registered",
+      "driver": "Driver"
+    }
+  }
+}

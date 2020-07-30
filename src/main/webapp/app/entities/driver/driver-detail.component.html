@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="driver">
+            <h2><span jhiTranslate="infringementwebApp.driver.detail.title">Driver</span> {{ driver.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="infringementwebApp.driver.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{ driver.firstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{ driver.lastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.middleName">Middle Name</span></dt>
+                <dd>
+                    <span>{{ driver.middleName }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.email">Email</span></dt>
+                <dd>
+                    <span>{{ driver.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.nationalIdNumber">National Id Number</span></dt>
+                <dd>
+                    <span>{{ driver.nationalIdNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.cellNumber">Cell Number</span></dt>
+                <dd>
+                    <span>{{ driver.cellNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.province">Province</span></dt>
+                <dd>
+                    <span>{{ driver.province }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.city">City</span></dt>
+                <dd>
+                    <span>{{ driver.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.suburb">Suburb</span></dt>
+                <dd>
+                    <span>{{ driver.suburb }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.streetName">Street Name</span></dt>
+                <dd>
+                    <span>{{ driver.streetName }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.streetPropertyNumber">Street Property Number</span></dt>
+                <dd>
+                    <span>{{ driver.streetPropertyNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="infringementwebApp.driver.unitNumber">Unit Number</span></dt>
+                <dd>
+                    <span>{{ driver.unitNumber }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/driver', driver.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

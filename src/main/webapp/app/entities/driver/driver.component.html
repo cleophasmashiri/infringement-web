@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="infringementwebApp.driver.home.title">Drivers</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-driver" [routerLink]="['/driver/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="infringementwebApp.driver.home.createLabel">
+            Create a new Driver
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="drivers?.length === 0">
+        <span jhiTranslate="infringementwebApp.driver.home.notFound">No drivers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="drivers && drivers.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="firstName"><span jhiTranslate="infringementwebApp.driver.firstName">First Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastName"><span jhiTranslate="infringementwebApp.driver.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="middleName"><span jhiTranslate="infringementwebApp.driver.middleName">Middle Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="infringementwebApp.driver.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nationalIdNumber"><span jhiTranslate="infringementwebApp.driver.nationalIdNumber">National Id Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cellNumber"><span jhiTranslate="infringementwebApp.driver.cellNumber">Cell Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="province"><span jhiTranslate="infringementwebApp.driver.province">Province</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="city"><span jhiTranslate="infringementwebApp.driver.city">City</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="suburb"><span jhiTranslate="infringementwebApp.driver.suburb">Suburb</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="streetName"><span jhiTranslate="infringementwebApp.driver.streetName">Street Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="streetPropertyNumber"><span jhiTranslate="infringementwebApp.driver.streetPropertyNumber">Street Property Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="unitNumber"><span jhiTranslate="infringementwebApp.driver.unitNumber">Unit Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let driver of drivers ;trackBy: trackId">
+                    <td><a [routerLink]="['/driver', driver.id, 'view']">{{ driver.id }}</a></td>
+                    <td>{{ driver.firstName }}</td>
+                    <td>{{ driver.lastName }}</td>
+                    <td>{{ driver.middleName }}</td>
+                    <td>{{ driver.email }}</td>
+                    <td>{{ driver.nationalIdNumber }}</td>
+                    <td>{{ driver.cellNumber }}</td>
+                    <td>{{ driver.province }}</td>
+                    <td>{{ driver.city }}</td>
+                    <td>{{ driver.suburb }}</td>
+                    <td>{{ driver.streetName }}</td>
+                    <td>{{ driver.streetPropertyNumber }}</td>
+                    <td>{{ driver.unitNumber }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/driver', driver.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/driver', driver.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(driver)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
