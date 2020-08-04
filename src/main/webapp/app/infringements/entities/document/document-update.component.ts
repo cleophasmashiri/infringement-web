@@ -10,7 +10,7 @@ import { IDocument, Document } from 'app/shared/model/document.model';
 import { DocumentService } from './document.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IInfringement } from 'app/shared/model/infringement.model';
-import { InfringementService } from 'app/entities/infringement/infringement.service';
+import { InfringementService } from '../infringement/infringement.service';
 
 @Component({
   selector: 'jhi-document-update',

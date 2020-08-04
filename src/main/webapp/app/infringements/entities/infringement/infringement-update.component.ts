@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-
 import { IInfringement, Infringement } from 'app/shared/model/infringement.model';
 import { InfringementService } from './infringement.service';
 import { IDriver } from 'app/shared/model/driver.model';
-import { DriverService } from 'app/entities/driver/driver.service';
 import { IVehicle } from 'app/shared/model/vehicle.model';
-import { VehicleService } from 'app/entities/vehicle/vehicle.service';
-
+import { DriverService } from '../driver/driver.service';
+import { VehicleService } from '../vehicle/vehicle.service';
 type SelectableEntity = IDriver | IVehicle;
 
 @Component({

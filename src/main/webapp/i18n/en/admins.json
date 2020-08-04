@@ -1,0 +1,12 @@
+{
+  "infringementwebApp": {
+    "infringements": {
+      "admins": {
+        "title": "Infringements Admins",
+        "createLabel": "Admin Infringements",
+        "createOrEditLabel": "Create or edit a Infringement",
+        "notFound": "No Infringements found"
+      }
+    }
+  }
+}

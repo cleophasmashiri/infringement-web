@@ -10,7 +10,7 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { IInfringementAction, InfringementAction } from 'app/shared/model/infringement-action.model';
 import { InfringementActionService } from './infringement-action.service';
 import { IInfringement } from 'app/shared/model/infringement.model';
-import { InfringementService } from 'app/entities/infringement/infringement.service';
+import { InfringementService } from '../infringement/infringement.service';
 
 @Component({
   selector: 'jhi-infringement-action-update',

@@ -1,0 +1,8 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="layout-wrapper"> 
+    <div fxFlex="80%" fxFlex.lt-md="100%" class="flex-wrapper"> 
+        <nav mat-tab-nav-bar [backgroundColor]="background">
+            <a *ngFor="let link of links" mat-tab-link routerLink="{{link.url}}" [active]="activeLink.name === link.name" (click)="activeLink = link">{{link.name}}</a>
+          </nav>
+        <router-outlet></router-outlet>
+    </div> 
+</div>

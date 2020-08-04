@@ -4,11 +4,10 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
 import { IVehicle, Vehicle } from 'app/shared/model/vehicle.model';
 import { VehicleService } from './vehicle.service';
 import { IDriver } from 'app/shared/model/driver.model';
-import { DriverService } from 'app/entities/driver/driver.service';
+import { DriverService } from '../driver/driver.service';
 
 @Component({
   selector: 'jhi-vehicle-update',
