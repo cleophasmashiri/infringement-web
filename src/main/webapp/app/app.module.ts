@@ -15,6 +15,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfringementsModule } from './infringements/infringements.module';
+import { JhMaterialModule } from './jh-material.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { InfringementsModule } from './infringements/infringements.module';
     InfringementsModule,
     InfringementwebAppRoutingModule,
     BrowserAnimationsModule,
+    JhMaterialModule,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
   bootstrap: [MainComponent],

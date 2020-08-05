@@ -1,56 +1,46 @@
-<form class="example-form mb-2">
-    <mat-form-field class="example-form-field">
-          <mat-label>Clearable input</mat-label>
-          <input matInput type="text" >
-    </mat-form-field>
+<mat-drawer-container class="mat-drawer-container landing-page">
 
-    <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Ex. pat@example.com">
-    </mat-form-field>
-    <button mat-raised-button color="primary">Hello jhipster material !</button>
-</form>
-<!-- <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-
-    <div class="col-md-9">
-        <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
-
-        <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
-
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
-                    [translateValues]="{ username: account.login }">You are logged in as user "{{ account.login }}".</span>
-            </div>
-
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-                <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-            </div>
-
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+    <!---->
+    <mat-drawer-content class="mat-drawer-content ng-star-inserted">
+        <div id="top" class="p-3 header-section">
+            <div class="theme-container">
+                <div fxlayout="row wrap" class="content"
+                    style="flex-flow: row wrap; box-sizing: border-box; display: flex;">
+                    <div fxflex="100" class="py-5"
+                        style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;">
+                        <h1>Manage your infringements smartly.</h1>
+                        <h4 class="mt-3">Housekey implements the official Angular Material Design
+                            components and built with Angular CLI. No Bootstrap!, No jQuery! and Only TypeScript! Start
+                            creating your app with Housekey template, 8 layouts, 8 color styles, 20+ pages</h4>
+                        <div class="py-5">
+                            <button routerLink="drivers" mat-raised color="primary">View Infringements</button>
+                            <a mat-raised color="accent"
+                                href="http://themeseason.com/" target="_blank"
+                                class="mat-focus-indicator uppercase mx-2 mat-raised-button mat-button-base mat-accent"
+                                tabindex="0" aria-disabled="false"><span class="mat-button-wrapper">Download App Now</span>
+                                <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                                <div class="mat-button-focus-overlay"></div>
+                            </a></div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <p jhiTranslate="home.question">
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.homepage">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.stackoverflow">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.bugtracker">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.chat">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.follow">follow @jhipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.github">GitHub</a>!
-        </p>
-    </div>
-</div> -->
+    
+        <mat-toolbar class="mat-toolbar copyright mat-toolbar-single-row">
+            <div class="theme-container">
+                <div fxlayout="row" fxlayout.xs="column" fxlayoutalign="space-between center"
+                    style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center space-between; align-items: center;">
+                    <p ngclass.xs="mt-1">Copyright © 2019 All Rights Reserved</p>
+                    <p>Designed &amp; Developed by <a _ngcontent-nst-c239="" mat-button=""
+                            href="http://themeseason.com/" target="_blank"
+                            class="mat-focus-indicator mat-button mat-button-base" tabindex="0"
+                            aria-disabled="false"><span class="mat-button-wrapper">ThemeSeason</span>
+                            <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                            <div class="mat-button-focus-overlay"></div>
+                        </a></p>
+                </div>
+            </div>
+        </mat-toolbar>
+    </mat-drawer-content>
+    <!---->
+</mat-drawer-container>
