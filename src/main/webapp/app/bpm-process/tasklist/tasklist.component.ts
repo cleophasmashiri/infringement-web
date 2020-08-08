@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../schemas/task.model';
 import { CamundaRestService } from '../camunda-rest.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'jhi-task-view',
-  templateUrl: './task-view.component.html',
-  styleUrls: ['./task-view.component.scss'],
+  selector: 'jhi-tasklist',
+  templateUrl: './tasklist.component.html',
+  styleUrls: ['./tasklist.component.scss'],
 })
-export class TaskViewComponent implements OnInit {
+export class TasklistComponent implements OnInit {
+  tasks: Task[] = [{ id: '100', name: 'Task 1', key: 'key1' }];
   taskId?: string;
   formKey?: string;
+
+  displayedColumns: string[] = ['name', 'assignee', 'created'];
 
   constructor(private camundaRestService: CamundaRestService, private route: ActivatedRoute) {}
 
@@ -19,6 +23,8 @@ export class TaskViewComponent implements OnInit {
         if (params.id != null) {
           this.taskId = params.id;
           this.getFormKey();
+        } else {
+          this.getTasks();
         }
       });
     }
@@ -26,5 +32,11 @@ export class TaskViewComponent implements OnInit {
 
   getFormKey(): void {
     this.camundaRestService.getTaskFormKey(this.taskId).subscribe(formKey => (this.formKey = formKey.key));
+  }
+
+  getTasks(): void {
+    this.camundaRestService.getTasksByGroup('trafficAdmin').subscribe(tasks => {
+      this.tasks = tasks;
+    });
   }
 }
