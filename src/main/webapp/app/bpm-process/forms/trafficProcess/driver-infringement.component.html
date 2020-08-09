@@ -1,0 +1,43 @@
+<section fxLayout fxLayout.lt-md="column wrap">
+    <mat-card fxFlex="100" fxFlex.gt-sm="40">
+        <mat-card-header>
+            <mat-card-title>Driver Representation</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div [hidden]="submitted">
+                <mat-list>
+                    <mat-list-item> Driver Id Number: <span>{{ model.driverIdNumber }}</span></mat-list-item>
+                    <mat-list-item> Plate Number: <span>{{ model.plateNumber }}</span></mat-list-item>
+                    <mat-list-item> Infringement Type: <span>{{ model.infringementType }}</span></mat-list-item>
+                    <mat-list-item> Infringement Notes: <span>{{ model.infringementNotes }}</span></mat-list-item>
+                   </mat-list>
+                <form fxLayout="column" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Driver Choice</mat-label>
+                        <mat-select [(ngModel)]="model.driverSelects" name="driverSelects">
+                            <mat-option *ngFor="let item of driverChoices" [value]="item.value">
+                                {{ item.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <textarea name="driverNotes" ngModel type="text" matInput [(ngModel)]="model.driverNotes"
+                            placeholder="Enter Notes" required #driverNotes="ngModel"></textarea>
+                        <mat-error *ngIf="driverNotes.hasError('required')">Driver Notes Required
+                        </mat-error>
+                    </mat-form-field>
+    
+                    <button type="submit" mat-raised-button color="primary"
+                        [disabled]="!startNewProcess.form.valid">Submit</button>
+                </form>
+            </div>
+            <div [hidden]="!submitted">
+                <p>Task Completed successfully.</p>
+                <div>
+                    <button (click)="showTasks()" mat-raised-button color="primary">Create another infringement</button>
+                    <button routerLink="/process/tasklist" mat-raised-button color="primary">Go to tasks</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</section>

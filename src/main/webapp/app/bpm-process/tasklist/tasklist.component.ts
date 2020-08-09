@@ -12,6 +12,7 @@ export class TasklistComponent implements OnInit {
   tasks: Task[] = [{ id: '100', name: 'Task 1', key: 'key1' }];
   taskId?: string;
   formKey?: string;
+  isShowTaskView = false;
 
   displayedColumns: string[] = ['name', 'assignee', 'created'];
 
@@ -28,6 +29,10 @@ export class TasklistComponent implements OnInit {
         }
       });
     }
+  }
+
+  showTaskView(): void {
+    this.isShowTaskView = !this.isShowTaskView;
   }
 
   getFormKey(): void {

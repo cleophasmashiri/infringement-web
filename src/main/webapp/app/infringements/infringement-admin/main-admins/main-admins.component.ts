@@ -9,7 +9,7 @@ import { infringementsRoutes } from 'app/infringements/infringementsRoutes';
 })
 export class MainAdminsComponent implements OnInit {
   links = [
-    { name: 'Tasks', url: '/infringements/tasks' },
+    { name: 'Tasks', url: '/process/tasks' },
     { name: 'Create Infringement', url: '/infringements/startprocess/trafficProcess' },
     { name: 'Infringements', url: '/infringements/list' },
     { name: 'Drivers', url: '/infringements/drivers' },

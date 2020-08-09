@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CamundaRestService } from '../camunda-rest.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,19 +8,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./task-view.component.scss'],
 })
 export class TaskViewComponent implements OnInit {
+  @Input()
   taskId?: string;
   formKey?: string;
 
   constructor(private camundaRestService: CamundaRestService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    if (this.route.params != null) {
-      this.route.params.subscribe(params => {
-        if (params.id != null) {
-          this.taskId = params.id;
-          this.getFormKey();
-        }
-      });
+    if (this.taskId) {
+      this.getFormKey();
     }
   }
 

@@ -1,0 +1,51 @@
+<section fxLayout fxLayout.lt-md="column wrap">
+    <mat-card fxFlex="100" fxFlex.gt-sm="40">
+        <mat-card-header>
+            <mat-card-title>Create New Infringement</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div [hidden]="submitted">
+                <form fxLayout="column" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field>
+                        <input name="plateNumber" ngModel type="text" matInput placeholder="Enter Plate Number"  [(ngModel)]="model.plateNumber"
+                            required #plateNumber="ngModel">
+                        <mat-error *ngIf="plateNumber.hasError('required')">Plate Number Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input name="driverIdNumber" ngModel type="text" matInput placeholder="Enter Driver ID Number"  [(ngModel)]="model.driverIdNumber"
+                            required #driverIdNumber="ngModel">
+                        <mat-error *ngIf="driverIdNumber.hasError('required')">Driver ID Number Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Infringement Type</mat-label>
+                        <mat-select [(ngModel)]="model.infringementType" name="infringementType">
+                            <mat-option *ngFor="let item of infringmentTypes" [value]="item.value">
+                                {{ item.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <textarea name="infringementNotes" ngModel type="text" matInput [(ngModel)]="model.infringementNotes"
+                            placeholder="Enter Infringement Notes" required #infringementNotes="ngModel"></textarea>
+                        <mat-error *ngIf="infringementNotes.hasError('required')">Infringement Notes Required
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- <div style="margin-bottom: 10px;">
+                        <label for="image1">Image 1</label>
+                        <input (change)="handleFileInput($event.target.files)" name="image1" type="file" placeholder="Upload Image" required>
+                    </div> -->
+                  
+                    <button type="submit" mat-raised-button color="primary"
+                        [disabled]="!startNewProcess.form.valid">Submit</button>
+                </form>
+            </div>
+            <div [hidden]="!submitted">
+                <p>Infringement created successfully.</p>
+                <div>
+                    <button (click)="showTasks()" mat-raised-button color="primary">Create another infringement</button>
+                    <button routerLink="/process/tasklist" mat-raised-button color="primary">Go to tasks</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</section>

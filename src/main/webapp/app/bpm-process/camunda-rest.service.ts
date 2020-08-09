@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Task } from './schemas/task.model';
-import { ProcessDefinition } from './schemas/process-definition.model';
+import { ProcessDefinition } from './schemas/process-definition.schema';
 
 @Injectable({
   providedIn: 'root',
@@ -69,7 +69,7 @@ export class CamundaRestService {
     );
   }
 
-  getProcessDefinitionTaskKey(processDefinitionKey: string): Observable<any> {
+  getProcessDefinitionTaskKey(processDefinitionKey?: string): Observable<any> {
     const url = `${this.engineRestUrl}process-definition/key/${processDefinitionKey}/startForm`;
     return this.http.get<any>(url).pipe(
       tap(form => this.log(`fetched formkey`)),
@@ -101,10 +101,10 @@ export class CamundaRestService {
     return this.http.post(endpoint, formData);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): any {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      // console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
@@ -115,7 +115,7 @@ export class CamundaRestService {
   }
 
   /** Log a HeroService message with the MessageService */
-  private log(message: string) {
-    console.log(message);
+  private log(message: string): void {
+    // console.log(message);
   }
 }

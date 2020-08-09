@@ -3,22 +3,21 @@ import { CommonModule } from '@angular/common';
 import { TaskViewComponent } from './task-view/task-view.component';
 import { CreateProcessComponent } from './create-process/create-process.component';
 import { StartProcessComponent } from './start-process/start-process.component';
-import { NewProcessComponent } from './new-process/new-process.component';
 import { ProcesslistComponent } from './processlist/processlist.component';
 import { GenericFormComponent } from './generic-form/generic-form.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
-import { JhMaterialModule } from 'app/jh-material.module';
+import { InfringementwebSharedModule } from 'app/shared/shared.module';
+import { BpmProcessRoutingModule } from './bpm-process-routing.module';
 
 @NgModule({
   declarations: [
     TaskViewComponent,
     CreateProcessComponent,
     StartProcessComponent,
-    NewProcessComponent,
     ProcesslistComponent,
     GenericFormComponent,
     TasklistComponent,
   ],
-  imports: [CommonModule, JhMaterialModule],
+  imports: [CommonModule, InfringementwebSharedModule, BpmProcessRoutingModule],
 })
 export class BpmProcessModule {}

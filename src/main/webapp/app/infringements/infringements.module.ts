@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { InfringementwebEntityModule } from './entities/entity.module';
+import { BpmProcessModule } from 'app/bpm-process/bpm-process.module';
 
 @NgModule({
   imports: [
     InfringementwebEntityModule,
+    BpmProcessModule,
     RouterModule.forChild([
       {
         path: 'drivers',
