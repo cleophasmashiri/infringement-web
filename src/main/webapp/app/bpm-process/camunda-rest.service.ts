@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Task } from './schemas/task.model';
 import { ProcessDefinition } from './schemas/process-definition.schema';
 import { SERVER_API_URL } from 'app/app.constants';
+
+const httpOptions = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +16,12 @@ export class CamundaRestService {
 
   constructor(private http: HttpClient) {}
 
-  getTasks(assignee: string) {
+  getTasks(assignee: string): Observable<Task[]> {
     //const endpoint = `${engineRestUrl}task?assignee=${assignee}&sortBy=created&sortOrder=desc&maxResults=10`;
     const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc&maxResults=10`;
-    //this.http.get(endpoint);
+    this.http.get(endpoint, httpOptions).subscribe(x => console.log(x));
 
-    return this.http.get<any>(endpoint).pipe(
+    return this.http.get<any>(endpoint, httpOptions).pipe(
       tap(form => this.log(`fetched tasks`)),
       catchError(this.handleError('getTasks', []))
     );
@@ -34,7 +36,7 @@ export class CamundaRestService {
   }
   getTasksByGroup(group: string): Observable<Task[]> {
     const endpoint = `${this.engineRestUrl}task?candidateGroup=${group}&sortBy=created&sortOrder=desc&maxResults=10`;
-    return this.http.get<any>(endpoint).pipe(
+    return this.http.get<any>(endpoint, httpOptions).pipe(
       tap(form => this.log(`fetched tasks`)),
       catchError(this.handleError('getTasks', []))
     );
@@ -42,7 +44,7 @@ export class CamundaRestService {
 
   getGroups(username: string): Observable<string[]> {
     const endpoint = `${this.engineRestUrl}identity/groups?userId=${username}`;
-    return this.http.get<any>(endpoint).pipe(
+    return this.http.get<any>(endpoint, httpOptions).pipe(
       tap(group => this.log(`fetched groups`)),
       catchError(this.handleError('getGroups', []))
     );
@@ -50,7 +52,7 @@ export class CamundaRestService {
 
   getTaskFormKey(taskId?: string): Observable<any> {
     const endpoint = `${this.engineRestUrl}task/${taskId}/form`;
-    return this.http.get<any>(endpoint).pipe(
+    return this.http.get<any>(endpoint, httpOptions).pipe(
       tap(form => this.log(`fetched taskform`)),
       catchError(this.handleError('getTaskFormKey', []))
     );
@@ -58,7 +60,7 @@ export class CamundaRestService {
 
   getVariablesForTask(taskId: string, variableNames: string): Observable<any> {
     const endpoint = `${this.engineRestUrl}task/${taskId}/form-variables?variableNames=${variableNames}`;
-    return this.http.get<any>(endpoint).pipe(
+    return this.http.get<any>(endpoint, httpOptions).pipe(
       tap(form => this.log(`fetched variables`)),
       catchError(this.handleError('getVariablesForTask', []))
     );
@@ -66,7 +68,7 @@ export class CamundaRestService {
 
   postCompleteTask(taskId: string, variables: any): Observable<any> {
     const endpoint = `${this.engineRestUrl}task/${taskId}/complete`;
-    return this.http.post<any>(endpoint, variables).pipe(
+    return this.http.post<any>(endpoint, variables, httpOptions).pipe(
       tap(tasks => this.log(`posted complete task`)),
       catchError(this.handleError('postCompleteTask', []))
     );
@@ -81,7 +83,7 @@ export class CamundaRestService {
   }
 
   getProcessDefinitions(): Observable<ProcessDefinition[]> {
-    return this.http.get<ProcessDefinition[]>(this.engineRestUrl + 'process-definition?latestVersion=true').pipe(
+    return this.http.get<ProcessDefinition[]>(this.engineRestUrl + 'process-definition?latestVersion=true', httpOptions).pipe(
       tap(processDefinitions => this.log(`fetched processDefinitions`)),
       catchError(this.handleError('getProcessDefinitions', []))
     );
@@ -89,7 +91,7 @@ export class CamundaRestService {
 
   postProcessInstance(processDefinitionKey: string, variables: any): Observable<any> {
     const endpoint = `${this.engineRestUrl}process-definition/key/${processDefinitionKey}/start`;
-    return this.http.post<any>(endpoint, variables).pipe(
+    return this.http.post<any>(endpoint, variables, httpOptions).pipe(
       tap(processDefinitions => this.log(`posted process instance`)),
       catchError(this.handleError('postProcessInstance', []))
     );
@@ -101,7 +103,7 @@ export class CamundaRestService {
 
     formData.append('fileKey', fileToUpload, fileToUpload.name);
 
-    return this.http.post(endpoint, formData);
+    return this.http.post(endpoint, formData, httpOptions);
   }
 
   private handleError<T>(operation = 'operation', result?: T): any {
