@@ -4,18 +4,21 @@ import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Task } from './schemas/task.model';
 import { ProcessDefinition } from './schemas/process-definition.schema';
+import { SERVER_API_URL } from 'app/app.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CamundaRestService {
-  private engineRestUrl = '/engine-rest/';
+  private engineRestUrl = `${SERVER_API_URL}api/engine-rest/`;
 
   constructor(private http: HttpClient) {}
 
-  getTasks(assignee: string): Observable<Task[]> {
-    // const endpoint = `${this.engineRestUrl}task?assignee=${assignee}&sortBy=created&sortOrder=desc&maxResults=10`;
+  getTasks(assignee: string) {
+    //const endpoint = `${engineRestUrl}task?assignee=${assignee}&sortBy=created&sortOrder=desc&maxResults=10`;
     const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc&maxResults=10`;
+    //this.http.get(endpoint);
+
     return this.http.get<any>(endpoint).pipe(
       tap(form => this.log(`fetched tasks`)),
       catchError(this.handleError('getTasks', []))
