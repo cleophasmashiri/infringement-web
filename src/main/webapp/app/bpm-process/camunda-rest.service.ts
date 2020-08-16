@@ -12,15 +12,12 @@ const httpOptions = { headers: new HttpHeaders().set('Content-Type', 'applicatio
   providedIn: 'root',
 })
 export class CamundaRestService {
-  private engineRestUrl = `${SERVER_API_URL}api/engine-rest/`;
+  private engineRestUrl = `${SERVER_API_URL}services/infringementapi/api/engine-rest/`;
 
   constructor(private http: HttpClient) {}
 
   getTasks(assignee: string): Observable<Task[]> {
-    //const endpoint = `${engineRestUrl}task?assignee=${assignee}&sortBy=created&sortOrder=desc&maxResults=10`;
     const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc&maxResults=10`;
-    this.http.get(endpoint, httpOptions).subscribe(x => console.log(x));
-
     return this.http.get<any>(endpoint, httpOptions).pipe(
       tap(form => this.log(`fetched tasks`)),
       catchError(this.handleError('getTasks', []))
@@ -36,10 +33,11 @@ export class CamundaRestService {
   }
   getTasksByGroup(group: string): Observable<Task[]> {
     const endpoint = `${this.engineRestUrl}task?candidateGroup=${group}&sortBy=created&sortOrder=desc&maxResults=10`;
-    return this.http.get<any>(endpoint, httpOptions).pipe(
-      tap(form => this.log(`fetched tasks`)),
-      catchError(this.handleError('getTasks', []))
-    );
+    return this.http.get<any>(endpoint);
+    // return this.http.get<any>(endpoint, httpOptions).pipe(
+    //   tap(form => this.log(`fetched tasks`)),
+    //   catchError(this.handleError('getTasks', []))
+    // );
   }
 
   getGroups(username: string): Observable<string[]> {

@@ -25,6 +25,7 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatSidenavModule,
     MatTableModule,
+    FlexLayoutModule,
   ],
   exports: [
     MatButtonModule,
@@ -82,6 +84,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatSidenavModule,
     MatTableModule,
+    FlexLayoutModule,
   ],
 })
 export class JhMaterialModule {}

@@ -11,7 +11,7 @@ type EntityArrayResponseType = HttpResponse<IDriver[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DriverService {
-  public resourceUrl = SERVER_API_URL + 'api/drivers';
+  public resourceUrl = SERVER_API_URL + 'services/infringementapi/api/drivers';
 
   constructor(protected http: HttpClient) {}
 

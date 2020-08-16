@@ -11,7 +11,7 @@ type EntityArrayResponseType = HttpResponse<IDocument[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DocumentService {
-  public resourceUrl = SERVER_API_URL + 'api/documents';
+  public resourceUrl = SERVER_API_URL + 'services/infringementapi/api/documents';
 
   constructor(protected http: HttpClient) {}
 

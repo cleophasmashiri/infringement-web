@@ -11,7 +11,7 @@ type EntityArrayResponseType = HttpResponse<IVehicle[]>;
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
-  public resourceUrl = SERVER_API_URL + 'api/vehicles';
+  public resourceUrl = SERVER_API_URL + 'services/infringementapi/api/vehicles';
 
   constructor(protected http: HttpClient) {}
 
