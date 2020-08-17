@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IDriver, Driver } from 'app/shared/model/driver.model';
 import { DriverService } from './driver.service';
+import { IUser } from 'app/core/user/user.model';
 
 @Component({
   selector: 'jhi-driver-update',
@@ -31,12 +32,43 @@ export class DriverUpdateComponent implements OnInit {
     unitNumber: [],
   });
 
-  constructor(protected driverService: DriverService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected driverService: DriverService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
+
+  editUserFrom = this.fb.group({
+    username: [],
+    password: [],
+    confirmPassword: [],
+  });
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ driver }) => {
       this.updateForm(driver);
     });
+  }
+
+  // constructor(
+  //   public id?: any,
+  //   public login?: string,
+  //   public firstName?: string,
+  //   public lastName?: string,
+  //   public email?: string,
+  //   public activated?: boolean,
+  //   public langKey?: string,
+  //   public authorities?: string[],
+  //   public createdBy?: string,
+  //   public createdDate?: Date,
+  //   public lastModifiedBy?: string,
+  //   public lastModifiedDate?: Date,
+  //   public password?: string
+  // ) {}
+
+  updateUserForm(user: IUser): void {
+    this.editUserFrom.patchValue({
+      login: user.email,
+      password: user.password,
+      email: user.email
+    }
+    );
   }
 
   updateForm(driver: IDriver): void {

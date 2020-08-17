@@ -9,6 +9,7 @@ import { InfringementComponent } from '../entities/infringement/infringement.com
 import { DriverComponent } from '../entities/driver/driver.component';
 import { VehicleComponent } from '../entities/vehicle/vehicle.component';
 import { TasklistComponent } from 'app/bpm-process/tasklist/tasklist.component';
+// import { RegisterDriverComponent } from 'app/infringements/entities/driver/'
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'list', component: InfringementComponent },
       { path: 'drivers', component: DriverComponent },
       { path: 'vehicles', component: VehicleComponent },
+      //{ path: 'drivers/new', component: RegisterDriverComponent}
     ],
   },
 ];
