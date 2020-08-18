@@ -17,7 +17,7 @@ export class RegisterComponent implements AfterViewInit {
   login?: ElementRef;
 
   @Output()
-  registerUser = new EventEmitter<string>();
+  registerUser: EventEmitter<string> = new EventEmitter();
   
   doNotMatch = false;
   error = false;

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IUser } from 'app/core/user/user.model';
 
 @Component({
     selector: 'jhi-register-driver',
@@ -21,13 +20,10 @@ export class RegisterDriverComponent implements OnInit {
     ];
     activeLink = this.links[0];
 
-    handleRegisterUser(email: string){
+    handleRegisterUser(email: string): void{
         this.driverEmail = email;
     }
-    driverCreated(){
-
-    }
-
+   
     ngOnInit(): void {
     }
 

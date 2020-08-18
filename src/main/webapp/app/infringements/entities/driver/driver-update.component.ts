@@ -20,7 +20,7 @@ export class DriverUpdateComponent implements OnInit {
   driverEmail?: string;
 
   @Output()
-  driverCreated = new EventEmitter();
+  driverCreated: EventEmitter = new EventEmitter();
   
   editForm = this.fb.group({
     id: [],
