@@ -6,7 +6,7 @@
         </section>
         <section *ngIf="driverEmail">
             <h3>Create Driver</h3>
-            <jhi-driver-update [driverEmail]="driverEmail"></jhi-driver-update>
+            <jhi-driver-update (driverCreated)="driverCreated()" [driverEmail]="driverEmail"></jhi-driver-update>
         </section>
     </div> 
 </div>

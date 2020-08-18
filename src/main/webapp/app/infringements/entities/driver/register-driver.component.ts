@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IUser } from 'app/core/user/user.model';
 
 @Component({
@@ -21,6 +21,9 @@ export class RegisterDriverComponent implements OnInit {
 
     handleRegisterUser(email: string){
         this.driverEmail = email;
+    }
+    driverCreated(){
+
     }
 
     ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder } from '@angular/forms';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IDriver, Driver } from 'app/shared/model/driver.model';
 import { DriverService } from './driver.service';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'jhi-driver-update',
@@ -17,6 +18,9 @@ export class DriverUpdateComponent implements OnInit {
 
   @Input()
   driverEmail?: string;
+
+  @Output()
+  driverCreated = new EventEmitter();
   
   editForm = this.fb.group({
     id: [],
@@ -102,6 +106,7 @@ export class DriverUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
+    this.driverCreated.emit('');
     this.previousState();
   }
 
