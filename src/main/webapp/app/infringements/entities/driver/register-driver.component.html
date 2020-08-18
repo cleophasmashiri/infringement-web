@@ -1,12 +1,12 @@
 <div fxLayout="row wrap" fxLayoutAlign="center center" class="layout-wrapper"> 
     <div fxFlex="80%" fxFlex.lt-md="100%" class="flex-wrapper"> 
-        <section>
+        <section *ngIf="!driverEmail">
             <h3>Create User</h3>
-            <jhi-register></jhi-register>
+            <jhi-register (registerUser)="handleRegisterUser(email)"></jhi-register>
         </section>
-        <section>
+        <section *ngIf="driverEmail">
             <h3>Create Driver</h3>
-            <jhi-driver-update></jhi-driver-update>
+            <jhi-driver-update [driverEmail]="driverEmail"></jhi-driver-update>
         </section>
     </div> 
 </div>

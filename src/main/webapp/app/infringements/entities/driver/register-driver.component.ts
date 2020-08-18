@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { IUser } from 'app/core/user/user.model';
 
 @Component({
     selector: 'jhi-register-driver',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterDriverComponent implements OnInit {
 
+    driverEmail?: string;
     background: any = undefined;
     links = [{
         url: 'infringements/user',
@@ -16,6 +18,10 @@ export class RegisterDriverComponent implements OnInit {
     }
     ];
     activeLink = this.links[0];
+
+    handleRegisterUser(email: string){
+        this.driverEmail = email;
+    }
 
     ngOnInit(): void {
     }

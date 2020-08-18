@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder } from '@angular/forms';
@@ -15,12 +15,15 @@ import { DriverService } from './driver.service';
 export class DriverUpdateComponent implements OnInit {
   isSaving = false;
 
+  @Input()
+  driverEmail?: string;
+  
   editForm = this.fb.group({
     id: [],
     firstName: [],
     lastName: [],
     middleName: [],
-    email: [],
+    email: [this.driverEmail],
     nationalIdNumber: [],
     cellNumber: [],
     province: [],
