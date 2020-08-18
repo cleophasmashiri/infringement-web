@@ -11,6 +11,7 @@ import { DriverService } from './driver.service';
 import { DriverComponent } from './driver.component';
 import { DriverDetailComponent } from './driver-detail.component';
 import { DriverUpdateComponent } from './driver-update.component';
+import { RegisterDriverComponent } from './register-driver.component';
 
 @Injectable({ providedIn: 'root' })
 export class DriverResolve implements Resolve<IDriver> {
@@ -58,7 +59,7 @@ export const driverRoute: Routes = [
   },
   {
     path: 'new',
-    component: DriverUpdateComponent,
+    component: RegisterDriverComponent,
     resolve: {
       driver: DriverResolve,
     },

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainAdminsComponent } from './main-admins/main-admins.component';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { TaskViewComponent } from 'app/bpm-process/task-view/task-view.component';
 import { StartProcessComponent } from 'app/bpm-process/start-process/start-process.component';
@@ -9,7 +8,7 @@ import { InfringementComponent } from '../entities/infringement/infringement.com
 import { DriverComponent } from '../entities/driver/driver.component';
 import { VehicleComponent } from '../entities/vehicle/vehicle.component';
 import { TasklistComponent } from 'app/bpm-process/tasklist/tasklist.component';
-// import { RegisterDriverComponent } from 'app/infringements/entities/driver/'
+import { RegisterDriverComponent } from '../entities/driver/register-driver.component';
 
 const routes: Routes = [
   {
@@ -26,7 +25,7 @@ const routes: Routes = [
       { path: 'list', component: InfringementComponent },
       { path: 'drivers', component: DriverComponent },
       { path: 'vehicles', component: VehicleComponent },
-      //{ path: 'drivers/new', component: RegisterDriverComponent}
+      { path: 'drivers/new', component: RegisterDriverComponent}
     ],
   },
 ];
