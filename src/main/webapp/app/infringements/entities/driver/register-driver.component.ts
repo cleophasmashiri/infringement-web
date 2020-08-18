@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IUser } from 'app/core/user/user.model';
 
 @Component({
@@ -7,7 +7,9 @@ import { IUser } from 'app/core/user/user.model';
 })
 export class RegisterDriverComponent implements OnInit {
 
+    @Input()
     driverEmail?: string;
+    
     background: any = undefined;
     links = [{
         url: 'infringements/user',
