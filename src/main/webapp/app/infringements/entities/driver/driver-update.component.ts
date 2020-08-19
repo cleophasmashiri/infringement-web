@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder } from '@angular/forms';
@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IDriver, Driver } from 'app/shared/model/driver.model';
 import { DriverService } from './driver.service';
-import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'jhi-driver-update',
@@ -20,8 +19,8 @@ export class DriverUpdateComponent implements OnInit {
   driverEmail?: string;
 
   @Output()
-  driverCreated: EventEmitter = new EventEmitter();
-  
+  driverCreated: EventEmitter<any> = new EventEmitter();
+
   editForm = this.fb.group({
     id: [],
     firstName: [],
@@ -38,7 +37,7 @@ export class DriverUpdateComponent implements OnInit {
     unitNumber: [],
   });
 
-  constructor(protected driverService: DriverService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(protected driverService: DriverService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ driver }) => {
