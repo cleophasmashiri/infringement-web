@@ -10,11 +10,11 @@ export class RegisterService {
 
   userRegistered: Subject<string> = new Subject();
 
+  constructor(private http: HttpClient) {}
+
   getRegisteredUserSub(): Observable<string> {
     return this.userRegistered.asObservable();
   }
-
-  constructor(private http: HttpClient) {}
 
   raiseRegistered(email: string): void {
     this.userRegistered.next(email);
