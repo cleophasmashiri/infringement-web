@@ -4,8 +4,8 @@ import { of } from 'rxjs';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { DocumentDetailComponent } from 'app/entities/document/document-detail.component';
 import { Document } from 'app/shared/model/document.model';
+import { DocumentDetailComponent } from 'app/infringements/entities/document/document-detail.component';
 
 describe('Component Tests', () => {
   describe('Document Management Detail Component', () => {

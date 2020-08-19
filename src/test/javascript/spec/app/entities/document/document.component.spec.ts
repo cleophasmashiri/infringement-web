@@ -3,9 +3,9 @@ import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { DocumentComponent } from 'app/entities/document/document.component';
-import { DocumentService } from 'app/entities/document/document.service';
 import { Document } from 'app/shared/model/document.model';
+import { DocumentComponent } from 'app/infringements/entities/document/document.component';
+import { DocumentService } from 'app/infringements/entities/document/document.service';
 
 describe('Component Tests', () => {
   describe('Document Management Component', () => {

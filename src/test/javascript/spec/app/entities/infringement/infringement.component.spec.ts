@@ -4,9 +4,9 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { InfringementComponent } from 'app/entities/infringement/infringement.component';
-import { InfringementService } from 'app/entities/infringement/infringement.service';
 import { Infringement } from 'app/shared/model/infringement.model';
+import { InfringementComponent } from 'app/infringements/entities/infringement/infringement.component';
+import { InfringementService } from 'app/infringements/entities/infringement/infringement.service';
 
 describe('Component Tests', () => {
   describe('Infringement Management Component', () => {

@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { DocumentService } from 'app/entities/document/document.service';
 import { IDocument, Document } from 'app/shared/model/document.model';
+import { DocumentService } from 'app/infringements/entities/document/document.service';
 
 describe('Service Tests', () => {
   describe('Document Service', () => {

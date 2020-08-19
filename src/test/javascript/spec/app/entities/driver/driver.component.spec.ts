@@ -4,9 +4,9 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { DriverComponent } from 'app/entities/driver/driver.component';
-import { DriverService } from 'app/entities/driver/driver.service';
 import { Driver } from 'app/shared/model/driver.model';
+import { DriverComponent } from 'app/infringements/entities/driver/driver.component';
+import { DriverService } from 'app/infringements/entities/driver/driver.service';
 
 describe('Component Tests', () => {
   describe('Driver Management Component', () => {

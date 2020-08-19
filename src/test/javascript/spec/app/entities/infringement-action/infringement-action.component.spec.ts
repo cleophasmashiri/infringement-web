@@ -3,9 +3,9 @@ import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { InfringementActionComponent } from 'app/entities/infringement-action/infringement-action.component';
-import { InfringementActionService } from 'app/entities/infringement-action/infringement-action.service';
 import { InfringementAction } from 'app/shared/model/infringement-action.model';
+import { InfringementActionComponent } from 'app/infringements/entities/infringement-action/infringement-action.component';
+import { InfringementActionService } from 'app/infringements/entities/infringement-action/infringement-action.service';
 
 describe('Component Tests', () => {
   describe('InfringementAction Management Component', () => {

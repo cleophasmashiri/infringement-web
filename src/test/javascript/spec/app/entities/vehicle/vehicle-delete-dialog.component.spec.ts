@@ -6,8 +6,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { InfringementwebTestModule } from '../../../test.module';
 import { MockEventManager } from '../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
-import { VehicleDeleteDialogComponent } from 'app/entities/vehicle/vehicle-delete-dialog.component';
-import { VehicleService } from 'app/entities/vehicle/vehicle.service';
+import { VehicleDeleteDialogComponent } from 'app/infringements/entities/vehicle/vehicle-delete-dialog.component';
+import { VehicleService } from 'app/infringements/entities/vehicle/vehicle.service';
 
 describe('Component Tests', () => {
   describe('Vehicle Management Delete Component', () => {

@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { VehicleDetailComponent } from 'app/entities/vehicle/vehicle-detail.component';
 import { Vehicle } from 'app/shared/model/vehicle.model';
+import { VehicleDetailComponent } from 'app/infringements/entities/vehicle/vehicle-detail.component';
 
 describe('Component Tests', () => {
   describe('Vehicle Management Detail Component', () => {

@@ -4,9 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { DriverUpdateComponent } from 'app/entities/driver/driver-update.component';
-import { DriverService } from 'app/entities/driver/driver.service';
 import { Driver } from 'app/shared/model/driver.model';
+import { DriverUpdateComponent } from 'app/infringements/entities/driver/driver-update.component';
+import { DriverService } from 'app/infringements/entities/driver/driver.service';
 
 describe('Component Tests', () => {
   describe('Driver Management Update Component', () => {

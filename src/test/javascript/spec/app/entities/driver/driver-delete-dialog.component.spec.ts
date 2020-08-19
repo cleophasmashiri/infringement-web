@@ -6,8 +6,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { InfringementwebTestModule } from '../../../test.module';
 import { MockEventManager } from '../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
-import { DriverDeleteDialogComponent } from 'app/entities/driver/driver-delete-dialog.component';
-import { DriverService } from 'app/entities/driver/driver.service';
+import { DriverDeleteDialogComponent } from 'app/infringements/entities/driver/driver-delete-dialog.component';
+import { DriverService } from 'app/infringements/entities/driver/driver.service';
 
 describe('Component Tests', () => {
   describe('Driver Management Delete Component', () => {

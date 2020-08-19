@@ -4,9 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { InfringementActionUpdateComponent } from 'app/entities/infringement-action/infringement-action-update.component';
-import { InfringementActionService } from 'app/entities/infringement-action/infringement-action.service';
 import { InfringementAction } from 'app/shared/model/infringement-action.model';
+import { InfringementActionUpdateComponent } from 'app/infringements/entities/infringement-action/infringement-action-update.component';
+import { InfringementActionService } from 'app/infringements/entities/infringement-action/infringement-action.service';
 
 describe('Component Tests', () => {
   describe('InfringementAction Management Update Component', () => {

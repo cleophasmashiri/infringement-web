@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { VehicleService } from 'app/entities/vehicle/vehicle.service';
 import { IVehicle, Vehicle } from 'app/shared/model/vehicle.model';
+import { VehicleService } from 'app/infringements/entities/vehicle/vehicle.service';
 
 describe('Service Tests', () => {
   describe('Vehicle Service', () => {

@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { DriverService } from 'app/entities/driver/driver.service';
 import { IDriver, Driver } from 'app/shared/model/driver.model';
+import { DriverService } from 'app/infringements/entities/driver/driver.service';
 
 describe('Service Tests', () => {
   describe('Driver Service', () => {

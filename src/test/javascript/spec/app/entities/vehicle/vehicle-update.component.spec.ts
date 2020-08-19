@@ -4,9 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { VehicleUpdateComponent } from 'app/entities/vehicle/vehicle-update.component';
-import { VehicleService } from 'app/entities/vehicle/vehicle.service';
 import { Vehicle } from 'app/shared/model/vehicle.model';
+import { VehicleUpdateComponent } from 'app/infringements/entities/vehicle/vehicle-update.component';
+import { VehicleService } from 'app/infringements/entities/vehicle/vehicle.service';
 
 describe('Component Tests', () => {
   describe('Vehicle Management Update Component', () => {

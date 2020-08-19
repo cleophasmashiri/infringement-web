@@ -2,8 +2,8 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { InfringementService } from 'app/entities/infringement/infringement.service';
 import { IInfringement, Infringement } from 'app/shared/model/infringement.model';
+import { InfringementService } from 'app/infringements/entities/infringement/infringement.service';
 
 describe('Service Tests', () => {
   describe('Infringement Service', () => {

@@ -4,9 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { InfringementUpdateComponent } from 'app/entities/infringement/infringement-update.component';
-import { InfringementService } from 'app/entities/infringement/infringement.service';
 import { Infringement } from 'app/shared/model/infringement.model';
+import { InfringementUpdateComponent } from 'app/infringements/entities/infringement/infringement-update.component';
+import { InfringementService } from 'app/infringements/entities/infringement/infringement.service';
 
 describe('Component Tests', () => {
   describe('Infringement Management Update Component', () => {

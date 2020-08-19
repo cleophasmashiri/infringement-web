@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { InfringementDetailComponent } from 'app/entities/infringement/infringement-detail.component';
 import { Infringement } from 'app/shared/model/infringement.model';
+import { InfringementDetailComponent } from 'app/infringements/entities/infringement/infringement-detail.component';
 
 describe('Component Tests', () => {
   describe('Infringement Management Detail Component', () => {

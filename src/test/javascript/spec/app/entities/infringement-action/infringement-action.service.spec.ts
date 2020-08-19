@@ -2,9 +2,9 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { InfringementActionService } from 'app/entities/infringement-action/infringement-action.service';
 import { IInfringementAction, InfringementAction } from 'app/shared/model/infringement-action.model';
 import { InfringementActionType } from 'app/shared/model/enumerations/infringement-action-type.model';
+import { InfringementActionService } from 'app/infringements/entities/infringement-action/infringement-action.service';
 
 describe('Service Tests', () => {
   describe('InfringementAction Service', () => {

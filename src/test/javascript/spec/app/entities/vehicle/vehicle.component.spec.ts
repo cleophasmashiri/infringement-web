@@ -4,9 +4,9 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 import { InfringementwebTestModule } from '../../../test.module';
-import { VehicleComponent } from 'app/entities/vehicle/vehicle.component';
-import { VehicleService } from 'app/entities/vehicle/vehicle.service';
 import { Vehicle } from 'app/shared/model/vehicle.model';
+import { VehicleComponent } from 'app/infringements/entities/vehicle/vehicle.component';
+import { VehicleService } from 'app/infringements/entities/vehicle/vehicle.service';
 
 describe('Component Tests', () => {
   describe('Vehicle Management Component', () => {

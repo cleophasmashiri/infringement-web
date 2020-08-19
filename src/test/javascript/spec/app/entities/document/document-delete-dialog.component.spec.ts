@@ -6,8 +6,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { InfringementwebTestModule } from '../../../test.module';
 import { MockEventManager } from '../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
-import { DocumentDeleteDialogComponent } from 'app/entities/document/document-delete-dialog.component';
-import { DocumentService } from 'app/entities/document/document.service';
+import { DocumentDeleteDialogComponent } from 'app/infringements/entities/document/document-delete-dialog.component';
+import { DocumentService } from 'app/infringements/entities/document/document.service';
 
 describe('Component Tests', () => {
   describe('Document Management Delete Component', () => {
