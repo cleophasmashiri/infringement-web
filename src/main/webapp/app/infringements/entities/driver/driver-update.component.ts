@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder } from '@angular/forms';
@@ -7,16 +7,18 @@ import { Observable } from 'rxjs';
 
 import { IDriver, Driver } from 'app/shared/model/driver.model';
 import { DriverService } from './driver.service';
+import { RegisterService } from 'app/account/register/register.service';
 
 @Component({
   selector: 'jhi-driver-update',
   templateUrl: './driver-update.component.html',
 })
-export class DriverUpdateComponent implements OnInit {
+export class DriverUpdateComponent implements OnInit, OnDestroy {
   isSaving = false;
 
   @Input()
   driverEmail?: string;
+
 
   @Output()
   driverCreated: EventEmitter<any> = new EventEmitter();
@@ -36,10 +38,24 @@ export class DriverUpdateComponent implements OnInit {
     streetPropertyNumber: [],
     unitNumber: [],
   });
+  registeredUserSub: any;
 
-  constructor(protected driverService: DriverService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(private registerService: RegisterService, protected driverService: DriverService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  
+  ngOnDestroy(): void {
+    if (this.registeredUserSub) {
+      this.registeredUserSub.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
+    this.registeredUserSub = this.registerService.getRegisteredUserSub().subscribe(email => {
+      this.driverEmail = email;
+      const driver = {...this.createFromForm()};
+      driver.email = email;
+      this.updateForm(driver);
+      }
+    );
     this.activatedRoute.data.subscribe(({ driver }) => {
       this.updateForm(driver);
     });
