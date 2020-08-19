@@ -26,7 +26,7 @@ export class DriverUpdateComponent implements OnInit {
     firstName: [],
     lastName: [],
     middleName: [],
-    email: [this.driverEmail],
+    email: [{ value: null, disabled: true }],
     nationalIdNumber: [],
     cellNumber: [],
     province: [],
@@ -77,6 +77,8 @@ export class DriverUpdateComponent implements OnInit {
     }
   }
 
+  // this.editForm.get(['email'])!.value,
+
   private createFromForm(): IDriver {
     return {
       ...new Driver(),
@@ -84,7 +86,7 @@ export class DriverUpdateComponent implements OnInit {
       firstName: this.editForm.get(['firstName'])!.value,
       lastName: this.editForm.get(['lastName'])!.value,
       middleName: this.editForm.get(['middleName'])!.value,
-      email: this.editForm.get(['email'])!.value,
+      email: this.driverEmail,
       nationalIdNumber: this.editForm.get(['nationalIdNumber'])!.value,
       cellNumber: this.editForm.get(['cellNumber'])!.value,
       province: this.editForm.get(['province'])!.value,
