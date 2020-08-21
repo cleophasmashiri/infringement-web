@@ -1,5 +1,4 @@
 
-<span>{{driverEmail}}</span>
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
@@ -38,7 +37,8 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="infringementwebApp.driver.email"
                         for="field_email">Email</label>
-                    <input type="text" class="form-control" name="email" id="field_email" formControlName="email" />
+                        <span>{{ driverEmail }}</span>
+                    <!-- <input type="text" class="form-control" name="email" id="field_email" formControlName="email" /> -->
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="infringementwebApp.driver.nationalIdNumber"

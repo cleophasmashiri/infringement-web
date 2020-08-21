@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { JhiLanguageService } from 'ng-jhipster';
@@ -6,7 +6,7 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared/constants/error.constants';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { RegisterService } from './register.service';
-import { IUser } from 'app/core/user/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'jhi-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements AfterViewInit {
 
   @Output()
   registerUser: EventEmitter<string> = new EventEmitter();
-  
+
   doNotMatch = false;
   error = false;
   errorEmailExists = false;
@@ -58,7 +58,6 @@ export class RegisterComponent implements AfterViewInit {
     this.error = false;
     this.errorEmailExists = false;
     this.errorUserExists = false;
-
     const password = this.registerForm.get(['password'])!.value;
     if (password !== this.registerForm.get(['confirmPassword'])!.value) {
       this.doNotMatch = true;
@@ -66,9 +65,10 @@ export class RegisterComponent implements AfterViewInit {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
       this.registerService.save({ login, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
-        () => {this.success = true;
-          this.registerUser.emit(email)
-          this.registerService.raiseRegistered(email);
+        () => {
+          this.success = true;
+          this.registerUser.emit(email);
+          this.registerService.userRegistered.next(email);
         },
         response => this.processError(response)
       );

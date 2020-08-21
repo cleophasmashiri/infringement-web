@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { IDriver, Driver } from 'app/shared/model/driver.model';
 import { DriverService } from './driver.service';
@@ -13,12 +13,11 @@ import { RegisterService } from 'app/account/register/register.service';
   selector: 'jhi-driver-update',
   templateUrl: './driver-update.component.html',
 })
-export class DriverUpdateComponent implements OnInit, OnDestroy {
+export class DriverUpdateComponent implements OnInit {
   isSaving = false;
 
   @Input()
   driverEmail?: string;
-
 
   @Output()
   driverCreated: EventEmitter<any> = new EventEmitter();
@@ -38,24 +37,15 @@ export class DriverUpdateComponent implements OnInit, OnDestroy {
     streetPropertyNumber: [],
     unitNumber: [],
   });
-  registeredUserSub: any;
 
-  constructor(private registerService: RegisterService, protected driverService: DriverService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
-  
-  ngOnDestroy(): void {
-    if (this.registeredUserSub) {
-      this.registeredUserSub.unsubscribe();
-    }
-  }
+  constructor(
+    private registerService: RegisterService,
+    protected driverService: DriverService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.registeredUserSub = this.registerService.getRegisteredUserSub().subscribe(email => {
-      this.driverEmail = email;
-      const driver = {...this.createFromForm()};
-      driver.email = email;
-      this.updateForm(driver);
-      }
-    );
     this.activatedRoute.data.subscribe(({ driver }) => {
       this.updateForm(driver);
     });
@@ -86,15 +76,15 @@ export class DriverUpdateComponent implements OnInit, OnDestroy {
   save(): void {
     this.isSaving = true;
     const driver = this.createFromForm();
+
     if (driver.id !== undefined) {
-      this.subscribeToSaveResponse(this.driverService.update(driver));
+      this.subscribeToSaveResponse(this.driverService.update({ ...driver, email: this.driverEmail }));
     } else {
       this.subscribeToSaveResponse(this.driverService.create(driver));
     }
   }
 
   // this.editForm.get(['email'])!.value,
-
   private createFromForm(): IDriver {
     return {
       ...new Driver(),
