@@ -1,14 +1,10 @@
-/* after changing this file run 'npm run webpack:build' */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-/***************************
-put Sass variables here:
-eg $input-color: red;
-****************************/
-// Override Bootstrap variables
-@import 'bootstrap-variables';
-// Import Bootstrap source files from node_modules
-@import '~bootstrap/scss/bootstrap';
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
 
-/* jhipster-needle-scss-add-vendor JHipster will add new css style */
-
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+h1 {
+  text-align: center;
+}

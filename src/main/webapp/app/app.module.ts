@@ -16,6 +16,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfringementsModule } from './infringements/infringements.module';
 import { JhMaterialModule } from './jh-material.module';
+import { SidenavListComponent } from './layouts/sidenav-list/sidenav-list.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,15 @@ import { JhMaterialModule } from './jh-material.module';
     BrowserAnimationsModule,
     JhMaterialModule,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    SidenavListComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class InfringementwebAppModule {}

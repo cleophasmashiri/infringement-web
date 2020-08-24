@@ -1,6 +1,6 @@
 <jhi-page-ribbon></jhi-page-ribbon>
 
-<div>
+<!-- <div>
     <router-outlet name="navbar"></router-outlet>
 </div>
 
@@ -10,4 +10,16 @@
     </div>
 
     <jhi-footer></jhi-footer>
-</div>
+</div> -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+      <jhi-sidenav-list (closeSidenav)="sidenav.close()"></jhi-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <jhi-navbar (sidenavToggle)="sidenav.toggle()"></jhi-navbar>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
