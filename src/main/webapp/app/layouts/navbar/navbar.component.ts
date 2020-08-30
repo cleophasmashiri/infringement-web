@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -14,6 +14,7 @@ import { ProfileService } from 'app/layouts/profiles/profile.service';
   selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['navbar.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class NavbarComponent implements OnInit {
   inProduction?: boolean;

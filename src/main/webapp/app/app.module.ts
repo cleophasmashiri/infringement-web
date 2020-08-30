@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfringementsModule } from './infringements/infringements.module';
 import { JhMaterialModule } from './jh-material.module';
 import { SidenavListComponent } from './layouts/sidenav-list/sidenav-list.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './app.reducer';
 
 @NgModule({
   imports: [
@@ -29,6 +31,7 @@ import { SidenavListComponent } from './layouts/sidenav-list/sidenav-list.compon
     InfringementwebAppRoutingModule,
     BrowserAnimationsModule,
     JhMaterialModule,
+    StoreModule.forRoot(reducers),
   ],
   declarations: [
     MainComponent,

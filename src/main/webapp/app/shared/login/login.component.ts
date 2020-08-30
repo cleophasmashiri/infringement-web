@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, AfterViewInit, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { LoginService } from 'app/core/login/login.service';
@@ -9,7 +9,7 @@ import { LoginService } from 'app/core/login/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginModalComponent implements AfterViewInit {
+export class LoginModalComponent implements AfterViewInit, OnInit {
   @ViewChild('username', { static: false })
   username?: ElementRef;
 
@@ -22,6 +22,12 @@ export class LoginModalComponent implements AfterViewInit {
   });
 
   constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder) {}
+  ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+    });
+  }
 
   ngAfterViewInit(): void {
     if (this.username) {
@@ -35,7 +41,7 @@ export class LoginModalComponent implements AfterViewInit {
       username: '',
       password: '',
     });
-    //this.activeModal.dismiss('cancel');
+    this.router.navigate(['/']);
   }
 
   login(): void {

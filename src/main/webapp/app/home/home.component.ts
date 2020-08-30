@@ -14,6 +14,9 @@ import { Task } from 'app/bpm-process/schemas/task.model';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
+  isHeading = true;
+  isSubheading = true;
+  isHeadingBtn = true;
 
   constructor(private accountService: AccountService, private loginModalService: LoginModalService) {}
 
