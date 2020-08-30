@@ -59,24 +59,26 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   }
 
   register(): void {
-    this.doNotMatch = false;
-    this.error = false;
-    this.errorEmailExists = false;
-    this.errorUserExists = false;
-    const password = this.registerForm.get(['password'])!.value;
-    if (password !== this.registerForm.get(['confirmPassword'])!.value) {
-      this.doNotMatch = true;
-    } else {
-      const login = this.registerForm.get(['login'])!.value;
-      const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
-        () => {
-          this.success = true;
-          this.registerUser.emit(email);
-          this.registerService.userRegistered.next(email);
-        },
-        response => this.processError(response)
-      );
+    if (this.registerForm) {
+      this.doNotMatch = false;
+      this.error = false;
+      this.errorEmailExists = false;
+      this.errorUserExists = false;
+      const password = this.registerForm.get(['password'])!.value;
+      if (password !== this.registerForm.get(['confirmPassword'])!.value) {
+        this.doNotMatch = true;
+      } else {
+        const login = this.registerForm.get(['login'])!.value;
+        const email = this.registerForm.get(['email'])!.value;
+        this.registerService.save({ login, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
+          () => {
+            this.success = true;
+            this.registerUser.emit(email);
+            this.registerService.userRegistered.next(email);
+          },
+          response => this.processError(response)
+        );
+      }
     }
   }
 
