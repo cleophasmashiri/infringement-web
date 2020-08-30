@@ -9,25 +9,25 @@ import { LoginService } from 'app/core/login/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginModalComponent implements AfterViewInit, OnInit {
+export class LoginModalComponent implements AfterViewInit {
   @ViewChild('username', { static: false })
   username?: ElementRef;
 
   authenticationError = false;
 
-  loginForm = this.fb.group({
-    username: [''],
-    password: [''],
-    rememberMe: [false],
-  });
+  _loginForm?: FormGroup;
+  get loginForm(): FormGroup {
+    if (!this._loginForm) {
+      this._loginForm = this.fb.group({
+        username: [''],
+        password: [''],
+        rememberMe: [false],
+      });
+    }
+    return this._loginForm;
+  }
 
   constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder) {}
-  ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-    });
-  }
 
   ngAfterViewInit(): void {
     if (this.username) {
@@ -54,7 +54,7 @@ export class LoginModalComponent implements AfterViewInit, OnInit {
       .subscribe(
         () => {
           this.authenticationError = false;
-          //this.activeModal.close();
+          // this.activeModal.close();
           if (
             this.router.url === '/account/register' ||
             this.router.url.startsWith('/account/activate') ||
@@ -68,12 +68,12 @@ export class LoginModalComponent implements AfterViewInit, OnInit {
   }
 
   register(): void {
-    //this.activeModal.dismiss('to state register');
+    // this.activeModal.dismiss('to state register');
     this.router.navigate(['/account/register']);
   }
 
   requestResetPassword(): void {
-    //this.activeModal.dismiss('to state requestReset');
+    // this.activeModal.dismiss('to state requestReset');
     this.router.navigate(['/account/reset', 'request']);
   }
 }
