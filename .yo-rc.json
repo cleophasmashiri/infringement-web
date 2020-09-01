@@ -36,7 +36,9 @@
     "embeddableLaunchScript": false,
     "entitySuffix": "",
     "otherModules": [],
-    "blueprints": []
+    "blueprints": [],
+    "herokuAppName": "infringementweb",
+    "herokuDeployType": "jar"
   },
   "entities": []
 }
