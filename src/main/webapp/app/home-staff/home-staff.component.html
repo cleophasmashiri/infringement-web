@@ -2,18 +2,18 @@
     <div class="container">
         <div class="heading-section" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20">
             <div [class.animated]="isHeading" [class.fadeInLeft]="isHeading">
-                <h1 [ngStyle.xs]="{'font-size': '32px'}" [ngStyle.sm]="{'font-size': '42px'}">Manage your infringements
+                <h1 [ngStyle.xs]="{'font-size': '32px'}" [ngStyle.sm]="{'font-size': '42px'}">Administer infringements
                     smartly.</h1>
             </div>
             <div [class.animated]="isSubheading" [class.fadeInRight]="isSubheading">
-                <h2 [ngStyle.xs]="{'font-size': '18px'}" [ngStyle.sm]="{'font-size': '22px'}">Pay and receive your
+                <h2 [ngStyle.xs]="{'font-size': '18px'}" [ngStyle.sm]="{'font-size': '22px'}">Administer
                     infringement tickets via your phone, you can also monitor
                     demerit points smartly via your phone by simply installing the infringement app on your
                     phone.</h2>
             </div>
             <div fxLayout="row" [class.animated]="isHeadingBtn" [class.fadeIn]="isHeadingBtn"
                 [class.heading-btn]="isHeadingBtn">
-                <a routerLink="drivers" class="heading-button-left" mat-flat-button color="accent">View
+                <a routerLink="/staff/infringements" class="heading-button-left" mat-flat-button color="accent">View
                     Infringements</a>
                 <a class="heading-button-right" mat-stroked-button color="accent">Download App</a>
             </div>

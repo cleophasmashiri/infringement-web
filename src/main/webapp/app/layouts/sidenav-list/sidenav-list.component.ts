@@ -19,6 +19,23 @@ export class SidenavListComponent implements OnInit {
     return this.accountService.isAuthenticated();
   }
 
+  navigateToRigister(): void {
+    if (this.router.url.startsWith('/staff')) {
+      this.router.navigate(['account/register']);
+    } else {
+      this.router.navigate(['driver-registration']);
+    }
+    this.onClose();
+  }
+  navigateToInfringements(): void {
+    if (this.router.url.startsWith('/staff')) {
+      this.router.navigate(['staff/infringements']);
+    } else {
+      this.router.navigate(['drivers']);
+    }
+    this.onClose();
+  }
+
   onClose(): void {
     this.closeSidenav.emit();
   }

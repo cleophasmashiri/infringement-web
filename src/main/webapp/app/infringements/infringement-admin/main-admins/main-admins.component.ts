@@ -9,11 +9,11 @@ import { infringementsRoutes } from 'app/infringements/infringementsRoutes';
 })
 export class MainAdminsComponent implements OnInit {
   links = [
-    { name: 'Tasks', url: '/infringements/tasks' },
-    { name: 'Create Infringement', url: '/infringements/startprocess/trafficProcess' },
-    { name: 'Infringements', url: '/infringements/list' },
-    { name: 'Drivers', url: '/infringements/drivers' },
-    { name: 'Vehicles', url: '/infringements/vehicles' },
+    { name: 'Tasks', url: '/staff/infringements/tasks' },
+    { name: 'Create Infringement', url: '/staff/infringements/startprocess/trafficProcess' },
+    { name: 'Infringements', url: '/staff/infringements/list' },
+    { name: 'Drivers', url: '/staff/infringements/drivers' },
+    { name: 'Vehicles', url: '/staff/infringements/vehicles' },
   ];
   routes?: Route[] = [];
   activeLink = this.links[0];

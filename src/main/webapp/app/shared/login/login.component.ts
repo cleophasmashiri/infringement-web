@@ -67,21 +67,32 @@ export class LoginModalComponent implements AfterViewInit, OnInit {
       .subscribe(
         () => {
           this.authenticationError = false;
-          if (this.redirecturl) {
-            this.router.navigate([this.redirecturl]);
-          } else {
-            this.router.navigate(['']);
-          }
+          this.navigateToHome();
         },
         () => (this.authenticationError = true)
       );
   }
 
   register(): void {
-    this.router.navigate(['/driver-registration']);
+    if (this.router.url && this.router.url.startsWith('/staff')) {
+      this.router.navigate(['/account/register']);
+    } else {
+      this.router.navigate(['/driver-registration']);
+    }
   }
 
   requestResetPassword(): void {
     this.router.navigate(['/account/reset', 'request']);
+  }
+  navigateToHome(): void {
+    if (this.redirecturl) {
+      this.router.navigate([this.redirecturl]);
+    } else {
+      if (this.router.url && this.router.url.startsWith('/staff')) {
+        this.router.navigate(['/staff']);
+      } else {
+        this.router.navigate(['']);
+      }
+    }
   }
 }

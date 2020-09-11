@@ -16,16 +16,19 @@
             </button>
         </li>
         <li *ngIf="!isAuthenticated()">
-            <button mat-button routerLink="driver-registration" routerLinkActive="active" (click)="collapseNavbar()">
+            <button mat-button (click)="navigateToRigister()" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.account.register">Register</span>
             </button>
         </li>
         <li *ngIf="isAuthenticated()">
-          <button mat-button routerLink="/drivers">Infringements</button>
+          <button mat-button (click)="navigateToInfringements()">Infringements</button>
         </li>
         <li *ngIf="isAuthenticated()">
-          <button style="cursor: pointer" (click)="logout()">Logout</button>
+          <button mat-button style="cursor: pointer" (click)="logout()">Logout</button>
+        </li>
+        <li>
+          <button mat-button  style="cursor: pointer" routerLink="/staff">Staff</button>
         </li>
       </ul>
     </div>

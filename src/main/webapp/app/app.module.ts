@@ -19,6 +19,7 @@ import { JhMaterialModule } from './jh-material.module';
 import { SidenavListComponent } from './layouts/sidenav-list/sidenav-list.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './app.reducer';
+import { InfringementwebHomeStaffModule } from './home-staff/home-staff.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { reducers } from './app.reducer';
     InfringementwebSharedModule,
     InfringementwebCoreModule,
     InfringementwebHomeModule,
+    InfringementwebHomeStaffModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     InfringementsModule,
     InfringementwebAppRoutingModule,

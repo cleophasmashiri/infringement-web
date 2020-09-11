@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class DriverMainComponent implements OnInit {
   background: any = undefined;
   links = [
-    { name: 'Tasks', url: '/drivers/tasks' },
+    { name: 'In-Box', url: '/drivers/tasks' },
     { name: 'Infringements', url: '/drivers/infringements' },
     { name: 'Demerit points', url: '/drivers/demerit' },
   ];

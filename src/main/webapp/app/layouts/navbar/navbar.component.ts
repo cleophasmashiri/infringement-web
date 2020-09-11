@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 
@@ -24,6 +24,13 @@ export class NavbarComponent implements OnInit {
   version: string;
   @Output() sidenavToggle = new EventEmitter<void>();
 
+  get baseUrl(): string {
+    let x = this.router.url;
+    // eslint-disable-next-line no-console
+    console.log(' this.router.url.', x);
+    return '';
+  }
+
   constructor(
     private loginService: LoginService,
     private languageService: JhiLanguageService,
@@ -31,16 +38,37 @@ export class NavbarComponent implements OnInit {
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
   }
 
   ngOnInit(): void {
+    this.activatedRoute.url.subscribe(x => {
+      // eslint-disable-next-line no-console
+      console.log(' this.router.url............', x);
+    });
+
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
       this.swaggerEnabled = profileInfo.swaggerEnabled;
     });
+  }
+
+  navigateToInfringements(): void {
+    if (this.router.url.startsWith('/staff')) {
+      this.router.navigate(['staff/infringements']);
+    } else {
+      this.router.navigate(['drivers']);
+    }
+  }
+  navigateToRigister(): void {
+    if (this.router.url.startsWith('/staff')) {
+      this.router.navigate(['account/register']);
+    } else {
+      this.router.navigate(['driver-registration']);
+    }
   }
 
   changeLanguage(languageKey: string): void {
