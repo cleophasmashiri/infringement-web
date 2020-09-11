@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -9,6 +9,7 @@ import { IVehicle } from 'app/shared/model/vehicle.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { VehicleService } from './vehicle.service';
 import { VehicleDeleteDialogComponent } from './vehicle-delete-dialog.component';
+import { VehicleUpdateComponent } from './vehicle-update.component';
 
 @Component({
   selector: 'jhi-vehicle',
@@ -22,6 +23,24 @@ export class VehicleComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  isShowViewMode = false;
+  isShowEditMode = false;
+  vehicle: any;
+  displayedColumns: string[] = [
+    'id',
+    'plateNumber',
+    'make',
+    'model',
+    'engineNumber',
+    'chassisNumber',
+    'yearFirstRegistered',
+    'viewActions',
+    'editActions',
+    'deleteActions',
+  ];
+
+  @ViewChild(VehicleUpdateComponent)
+  vehicleUpdateComponent!: VehicleUpdateComponent;
 
   constructor(
     protected vehicleService: VehicleService,
@@ -37,6 +56,26 @@ export class VehicleComponent implements OnInit, OnDestroy {
     };
     this.predicate = 'id';
     this.ascending = true;
+  }
+
+  goBackToListHandler(): void {
+    this.isShowEditMode = false;
+    this.isShowViewMode = false;
+  }
+  create(): void {
+    this.isShowEditMode = true;
+    this.isShowViewMode = false;
+  }
+  editViewMode(vehicle: IVehicle): void {
+    this.isShowEditMode = true;
+    this.isShowViewMode = false;
+    this.vehicle = vehicle;
+    this.vehicleUpdateComponent.updateVehicle(vehicle);
+  }
+  showViewMode(vehicle: IVehicle): void {
+    this.isShowEditMode = false;
+    this.isShowViewMode = true;
+    this.vehicle = vehicle;
   }
 
   loadAll(): void {

@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { LoginService } from 'app/core/login/login.service';
 
@@ -9,10 +9,10 @@ import { LoginService } from 'app/core/login/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginModalComponent implements AfterViewInit {
+export class LoginModalComponent implements AfterViewInit, OnInit {
   @ViewChild('username', { static: false })
   username?: ElementRef;
-
+  redirecturl = '';
   authenticationError = false;
 
   _loginForm?: FormGroup;
@@ -27,7 +27,20 @@ export class LoginModalComponent implements AfterViewInit {
     return this._loginForm;
   }
 
-  constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder) {}
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    private loginService: LoginService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(param => {
+      if (param && param['redirecturl']) {
+        this.redirecturl = param['redirecturl'];
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     if (this.username) {
@@ -54,12 +67,9 @@ export class LoginModalComponent implements AfterViewInit {
       .subscribe(
         () => {
           this.authenticationError = false;
-          // this.activeModal.close();
-          if (
-            this.router.url === '/account/register' ||
-            this.router.url.startsWith('/account/activate') ||
-            this.router.url.startsWith('/account/reset/')
-          ) {
+          if (this.redirecturl) {
+            this.router.navigate([this.redirecturl]);
+          } else {
             this.router.navigate(['']);
           }
         },
@@ -68,12 +78,10 @@ export class LoginModalComponent implements AfterViewInit {
   }
 
   register(): void {
-    // this.activeModal.dismiss('to state register');
-    this.router.navigate(['/account/register']);
+    this.router.navigate(['/driver-registration']);
   }
 
   requestResetPassword(): void {
-    // this.activeModal.dismiss('to state requestReset');
     this.router.navigate(['/account/reset', 'request']);
   }
 }

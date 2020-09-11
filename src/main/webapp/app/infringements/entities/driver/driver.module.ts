@@ -10,11 +10,10 @@ import { driverRoute } from './driver.route';
 import { CommonModule } from '@angular/common';
 import { JhMaterialModule } from 'app/jh-material.module';
 import { AccountModule } from 'app/account/account.module';
-import { RegisterDriverComponent } from './register-driver.component';
 
 @NgModule({
   imports: [CommonModule, JhMaterialModule, InfringementwebSharedModule, RouterModule.forChild(driverRoute), AccountModule],
-  declarations: [DriverComponent, DriverDetailComponent, DriverUpdateComponent, DriverDeleteDialogComponent, RegisterDriverComponent],
+  declarations: [DriverComponent, DriverDetailComponent, DriverUpdateComponent, DriverDeleteDialogComponent],
   entryComponents: [DriverDeleteDialogComponent],
 })
 export class InfringementwebDriverModule {}

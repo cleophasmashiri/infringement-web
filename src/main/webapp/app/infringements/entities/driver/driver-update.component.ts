@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { IDriver, Driver } from 'app/shared/model/driver.model';
 import { DriverService } from './driver.service';
@@ -17,17 +17,20 @@ export class DriverUpdateComponent implements OnInit {
   isSaving = false;
 
   @Input()
-  driverEmail?: string;
+  driverEmail = '';
 
   @Output()
   driverCreated: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  goBackToList = new EventEmitter();
 
   editForm = this.fb.group({
     id: [],
     firstName: [],
     lastName: [],
     middleName: [],
-    email: [{ value: null, disabled: true }],
+    email: [],
     nationalIdNumber: [],
     cellNumber: [],
     province: [],
@@ -38,6 +41,14 @@ export class DriverUpdateComponent implements OnInit {
     unitNumber: [],
   });
 
+  @Input()
+  get driver(): IDriver {
+    return this.createFromForm();
+  }
+  set driver(driver: IDriver) {
+    this.updateForm(driver);
+  }
+
   constructor(
     private registerService: RegisterService,
     protected driverService: DriverService,
@@ -45,46 +56,63 @@ export class DriverUpdateComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
+  updateDriver(driver: IDriver): void {
+    if (driver) {
+      this.updateForm(driver);
+    }
+  }
+
+  previousState(): void {
+    this.goBackToList.emit();
+  }
+
   ngOnInit(): void {
+    if (this.driver) {
+      this.updateForm(this.driver);
+    }
     this.activatedRoute.data.subscribe(({ driver }) => {
       this.updateForm(driver);
+    });
+    this.activatedRoute.queryParams.subscribe(param => {
+      if (param && param['driveremail']) {
+        this.driverEmail = param['driveremail'];
+        // eslint-disable-next-line no-console
+        console.log('driverEmail', this.driverEmail);
+      }
     });
   }
 
   updateForm(driver: IDriver): void {
-    this.editForm.patchValue({
-      id: driver.id,
-      firstName: driver.firstName,
-      lastName: driver.lastName,
-      middleName: driver.middleName,
-      email: driver.email,
-      nationalIdNumber: driver.nationalIdNumber,
-      cellNumber: driver.cellNumber,
-      province: driver.province,
-      city: driver.city,
-      suburb: driver.suburb,
-      streetName: driver.streetName,
-      streetPropertyNumber: driver.streetPropertyNumber,
-      unitNumber: driver.unitNumber,
-    });
-  }
-
-  previousState(): void {
-    window.history.back();
+    if (driver) {
+      this.editForm.patchValue({
+        id: driver.id,
+        firstName: driver.firstName,
+        lastName: driver.lastName,
+        middleName: driver.middleName,
+        email: driver.email,
+        nationalIdNumber: driver.nationalIdNumber,
+        cellNumber: driver.cellNumber,
+        province: driver.province,
+        city: driver.city,
+        suburb: driver.suburb,
+        streetName: driver.streetName,
+        streetPropertyNumber: driver.streetPropertyNumber,
+        unitNumber: driver.unitNumber,
+      });
+    }
   }
 
   save(): void {
     this.isSaving = true;
     const driver = this.createFromForm();
 
-    if (driver.id !== undefined) {
-      this.subscribeToSaveResponse(this.driverService.update({ ...driver, email: this.driverEmail }));
+    if (driver.id !== undefined && driver.id !== null) {
+      this.subscribeToSaveResponse(this.driverService.update({ ...driver }), false);
     } else {
-      this.subscribeToSaveResponse(this.driverService.create(driver));
+      this.subscribeToSaveResponse(this.driverService.create(driver), true);
     }
   }
 
-  // this.editForm.get(['email'])!.value,
   private createFromForm(): IDriver {
     return {
       ...new Driver(),
@@ -104,14 +132,15 @@ export class DriverUpdateComponent implements OnInit {
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IDriver>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IDriver>>, isNew: boolean): void {
     result.subscribe(
-      () => this.onSaveSuccess(),
+      () => this.onSaveSuccess(isNew),
       () => this.onSaveError()
     );
   }
 
-  protected onSaveSuccess(): void {
+  protected onSaveSuccess(isNew: boolean): void {
+    this.registerService.newDriverRegistered.next();
     this.isSaving = false;
     this.driverCreated.emit('');
     this.previousState();

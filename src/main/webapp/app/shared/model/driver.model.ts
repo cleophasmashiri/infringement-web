@@ -6,6 +6,7 @@ export interface IDriver {
   lastName?: string;
   middleName?: string;
   email?: string;
+  password?: string;
   nationalIdNumber?: string;
   cellNumber?: string;
   province?: string;

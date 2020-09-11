@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IInfringement } from 'app/shared/model/infringement.model';
 
 @Component({
   selector: 'jhi-infringement-detail',
   templateUrl: './infringement-detail.component.html',
 })
-export class InfringementDetailComponent implements OnInit {
+export class InfringementDetailComponent {
+  @Input()
   infringement: IInfringement | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  @Output()
+  goBackToList = new EventEmitter();
 
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ infringement }) => (this.infringement = infringement));
-  }
+  constructor() {}
 
   previousState(): void {
-    window.history.back();
+    this.goBackToList.emit();
   }
 }

@@ -1,52 +1,41 @@
-import { Component, AfterViewInit, ElementRef, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { JhiLanguageService } from 'ng-jhipster';
-
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared/constants/error.constants';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { RegisterService } from './register.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'jhi-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements AfterViewInit {
   @ViewChild('login', { static: false })
   login?: ElementRef;
-
-  @Output()
-  registerUser: EventEmitter<string> = new EventEmitter();
 
   doNotMatch = false;
   error = false;
   errorEmailExists = false;
   errorUserExists = false;
   success = false;
+  @Output()
+  registerUser: EventEmitter<string> = new EventEmitter();
 
-  _registerForm?: FormGroup;
-
-  get registerForm(): FormGroup {
-    if (!this._registerForm) {
-      this._registerForm = this.fb.group({
-        login: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(1),
-            Validators.maxLength(50),
-            Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
-          ],
-        ],
-        email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      });
-    }
-    return this._registerForm;
-  }
+  registerForm = this.fb.group({
+    login: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
+      ],
+    ],
+    email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+  });
 
   constructor(
     private languageService: JhiLanguageService,
@@ -77,7 +66,7 @@ export class RegisterComponent implements AfterViewInit {
           () => {
             this.success = true;
             this.registerUser.emit(email);
-            this.registerService.userRegistered.next(email);
+            this.registerService.newUserRegistered.next(email);
           },
           response => this.processError(response)
         );

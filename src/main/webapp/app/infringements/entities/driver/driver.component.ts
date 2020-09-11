@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -9,6 +9,7 @@ import { IDriver } from 'app/shared/model/driver.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { DriverService } from './driver.service';
 import { DriverDeleteDialogComponent } from './driver-delete-dialog.component';
+import { DriverUpdateComponent } from './driver-update.component';
 
 @Component({
   selector: 'jhi-driver',
@@ -22,6 +23,24 @@ export class DriverComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  displayedColumns: string[] = [
+    'id',
+    'firstName',
+    'lastName',
+    'middleName',
+    'email',
+    'nationalIdNumber',
+    'cellNumber',
+    'viewActions',
+    'editActions',
+    'deleteActions',
+  ];
+  driver: any;
+  isShowViewMode = false;
+  isShowEditMode = false;
+
+  @ViewChild(DriverUpdateComponent)
+  driverUpdateComponent!: DriverUpdateComponent;
 
   constructor(
     protected driverService: DriverService,
@@ -47,6 +66,26 @@ export class DriverComponent implements OnInit, OnDestroy {
         sort: this.sort(),
       })
       .subscribe((res: HttpResponse<IDriver[]>) => this.paginateDrivers(res.body, res.headers));
+  }
+
+  goBackToListHandler(): void {
+    this.isShowEditMode = false;
+    this.isShowViewMode = false;
+  }
+  create(): void {
+    this.isShowEditMode = true;
+    this.isShowViewMode = false;
+  }
+  editViewMode(driver: IDriver): void {
+    this.isShowEditMode = true;
+    this.isShowViewMode = false;
+    this.driver = driver;
+    this.driverUpdateComponent.updateDriver(driver);
+  }
+  showViewMode(driver: IDriver): void {
+    this.isShowEditMode = false;
+    this.isShowViewMode = true;
+    this.driver = driver;
   }
 
   reset(): void {

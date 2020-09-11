@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IVehicle } from 'app/shared/model/vehicle.model';
@@ -8,7 +8,11 @@ import { IVehicle } from 'app/shared/model/vehicle.model';
   templateUrl: './vehicle-detail.component.html',
 })
 export class VehicleDetailComponent implements OnInit {
+  @Input()
   vehicle: IVehicle | null = null;
+
+  @Output()
+  goBackToList = new EventEmitter();
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

@@ -8,7 +8,6 @@ import { InfringementComponent } from '../entities/infringement/infringement.com
 import { DriverComponent } from '../entities/driver/driver.component';
 import { VehicleComponent } from '../entities/vehicle/vehicle.component';
 import { TasklistComponent } from 'app/bpm-process/tasklist/tasklist.component';
-import { RegisterDriverComponent } from '../entities/driver/register-driver.component';
 
 const routes: Routes = [
   {
@@ -19,13 +18,17 @@ const routes: Routes = [
       pageTitle: 'infringementwebApp.infringements.admins.title',
     },
     children: [
+      {
+        path: '',
+        redirectTo: 'tasks',
+        pathMatch: 'full',
+      },
       { path: 'tasks', component: TasklistComponent },
       { path: 'tasks/:id', component: TaskViewComponent },
       { path: 'startprocess/:processdefinitionkey', component: StartProcessComponent },
       { path: 'list', component: InfringementComponent },
       { path: 'drivers', component: DriverComponent },
       { path: 'vehicles', component: VehicleComponent },
-      { path: 'drivers/new', component: RegisterDriverComponent}
     ],
   },
 ];

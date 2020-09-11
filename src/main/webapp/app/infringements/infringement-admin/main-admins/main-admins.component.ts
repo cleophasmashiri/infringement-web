@@ -13,7 +13,6 @@ export class MainAdminsComponent implements OnInit {
     { name: 'Create Infringement', url: '/infringements/startprocess/trafficProcess' },
     { name: 'Infringements', url: '/infringements/list' },
     { name: 'Drivers', url: '/infringements/drivers' },
-    { name: 'New Drivers', url: '/infringements/drivers/new' },
     { name: 'Vehicles', url: '/infringements/vehicles' },
   ];
   routes?: Route[] = [];

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
@@ -15,6 +15,8 @@ import { InfringementActionDeleteDialogComponent } from './infringement-action-d
 export class InfringementActionComponent implements OnInit, OnDestroy {
   infringementActions?: IInfringementAction[];
   eventSubscriber?: Subscription;
+  @Input()
+  infringementId?: string;
 
   constructor(
     protected infringementActionService: InfringementActionService,

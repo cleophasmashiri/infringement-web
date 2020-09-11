@@ -57,3 +57,16 @@ section {
 mat-table {
   width: 100%;
 }
+.mat-tab-label-active {
+  color: mat-color($nglp-accent, A700);
+}
+.mat-toolbar.mat-primary {
+  background: mat-color($nglp-accent, A700);
+  color: #fff;
+}
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+  color: #fff;
+}

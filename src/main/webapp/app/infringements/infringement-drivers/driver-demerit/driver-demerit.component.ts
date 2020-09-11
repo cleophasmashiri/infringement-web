@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./driver-demerit.component.scss'],
 })
 export class DriverDemeritComponent implements OnInit {
+  displayedColumns: any[] = ['description', 'created', 'points'];
+  items: any[] = [];
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  showItemView(): void {}
 }

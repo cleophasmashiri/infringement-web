@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IDriver } from 'app/shared/model/driver.model';
@@ -8,7 +8,11 @@ import { IDriver } from 'app/shared/model/driver.model';
   templateUrl: './driver-detail.component.html',
 })
 export class DriverDetailComponent implements OnInit {
+  @Input()
   driver: IDriver | null = null;
+
+  @Output()
+  goBackToList = new EventEmitter();
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 
@@ -17,6 +21,6 @@ export class DriverDetailComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    this.goBackToList.emit();
   }
 }

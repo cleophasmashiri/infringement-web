@@ -1,11 +1,11 @@
-<section fxLayout fxLayout.lt-md="column wrap">
-    <mat-card fxFlex="100" fxFlex.gt-sm="40">
+<!-- <section fxLayout fxLayout.lt-md="column wrap"> -->
+    <mat-card>
         <mat-card-header>
             <mat-card-title>Create New Infringement</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div [hidden]="submitted">
-                <form fxLayout="column" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
+                <form fxFlex="100" fxFlex.gt-sm="40" fxLayout="column" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
                     <mat-form-field>
                         <input name="plateNumber" ngModel type="text" matInput placeholder="Enter Plate Number"  [(ngModel)]="model.plateNumber"
                             required #plateNumber="ngModel">
@@ -48,4 +48,4 @@
             </div>
         </mat-card-content>
     </mat-card>
-</section>
+<!-- </section> -->

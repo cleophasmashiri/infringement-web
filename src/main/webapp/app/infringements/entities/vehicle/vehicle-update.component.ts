@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
@@ -16,6 +16,20 @@ import { DriverService } from '../driver/driver.service';
 export class VehicleUpdateComponent implements OnInit {
   isSaving = false;
   drivers: IDriver[] = [];
+
+  @Output()
+  vehicleCreated: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  goBackToList = new EventEmitter();
+
+  @Input()
+  get vehicle(): IVehicle {
+    return this.createFromForm();
+  }
+  set vehicle(vehicle: IVehicle) {
+    this.updateForm(vehicle);
+  }
 
   editForm = this.fb.group({
     id: [],
@@ -44,6 +58,16 @@ export class VehicleUpdateComponent implements OnInit {
     });
   }
 
+  updateVehicle(vehicle: IVehicle): void {
+    if (vehicle) {
+      this.updateForm(vehicle);
+    }
+  }
+
+  previousState(): void {
+    this.goBackToList.emit();
+  }
+
   updateForm(vehicle: IVehicle): void {
     this.editForm.patchValue({
       id: vehicle.id,
@@ -56,10 +80,6 @@ export class VehicleUpdateComponent implements OnInit {
       yearFirstRegistered: vehicle.yearFirstRegistered,
       driver: vehicle.driver,
     });
-  }
-
-  previousState(): void {
-    window.history.back();
   }
 
   save(): void {

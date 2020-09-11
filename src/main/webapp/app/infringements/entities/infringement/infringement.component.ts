@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -22,6 +22,9 @@ export class InfringementComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  displayedColumns: string[] = ['id', 'processInstanceId', 'infringementType', 'dateDone', 'doneBy', 'driver', 'vehicle', 'actions'];
+  isShowViewMode = false;
+  infringement: IInfringement | null = null;
 
   constructor(
     protected infringementService: InfringementService,
@@ -101,5 +104,14 @@ export class InfringementComponent implements OnInit, OnDestroy {
         this.infringements.push(data[i]);
       }
     }
+  }
+
+  showViewMode(infringement: IInfringement): void {
+    this.infringement = infringement;
+    this.isShowViewMode = true;
+  }
+
+  goBackToListHandler(): void {
+    this.isShowViewMode = false;
   }
 }

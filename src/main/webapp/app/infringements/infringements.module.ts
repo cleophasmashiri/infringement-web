@@ -9,6 +9,10 @@ import { BpmProcessModule } from 'app/bpm-process/bpm-process.module';
     BpmProcessModule,
     RouterModule.forChild([
       {
+        path: 'driver-registration',
+        loadChildren: () => import('./driver-registration/driver-registration.module').then(m => m.DriverRegistrationModule),
+      },
+      {
         path: 'drivers',
         loadChildren: () => import('./infringement-drivers/drivers.module').then(m => m.DriversModule),
       },

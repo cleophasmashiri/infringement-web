@@ -7,18 +7,10 @@ import { IUser } from 'app/core/user/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class RegisterService {
-
-  userRegistered: Subject<string> = new Subject();
+  newUserRegistered = new Subject<string>();
+  newDriverRegistered = new Subject();
 
   constructor(private http: HttpClient) {}
-
-  getRegisteredUserSub(): Observable<string> {
-    return this.userRegistered.asObservable();
-  }
-
-  raiseRegistered(email: string): void {
-    this.userRegistered.next(email);
-  }
 
   save(account: IUser): Observable<{}> {
     return this.http.post(SERVER_API_URL + 'api/register', account);
