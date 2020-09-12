@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../schemas/task.model';
 import { CamundaRestService } from '../camunda-rest.service';
 import { ActivatedRoute } from '@angular/router';
+import { AccountService } from 'app/core/auth/account.service';
+import { Observable } from 'rxjs';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-tasklist',
@@ -9,26 +12,31 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tasklist.component.scss'],
 })
 export class TasklistComponent implements OnInit {
-  tasks: Task[] = [{ id: '100', name: 'Task 1', key: 'key1' }];
+  tasks: Task[] = [];
   taskId?: string;
   formKey?: string;
   isShowTaskView = false;
-
+  account$?: Observable<Account | null>;
   displayedColumns: string[] = ['name', 'assignee', 'created'];
 
-  constructor(private camundaRestService: CamundaRestService, private route: ActivatedRoute) {}
+  constructor(private accountService: AccountService, private camundaRestService: CamundaRestService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    if (this.route.params != null) {
+    this.account$ = this.accountService.identity();
+    this.account$.subscribe(acc => {
       this.route.params.subscribe(params => {
         if (params.id != null) {
           this.taskId = params.id;
           this.getFormKey();
         } else {
-          this.getTasks();
+          if (this.accountService.isDriverPath) {
+            this.getTasksByUser(acc?.email);
+          } else {
+            this.getTasks();
+          }
         }
       });
-    }
+    });
   }
 
   showTaskView(): void {
@@ -43,5 +51,12 @@ export class TasklistComponent implements OnInit {
     this.camundaRestService.getTasksByGroup('trafficAdmin').subscribe(tasks => {
       this.tasks = tasks;
     });
+  }
+  getTasksByUser(assignee?: string): void {
+    if (assignee) {
+      this.camundaRestService.getTasksByAssignee(assignee).subscribe(tasks => {
+        this.tasks = tasks;
+      });
+    }
   }
 }

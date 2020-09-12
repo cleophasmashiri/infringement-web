@@ -24,13 +24,6 @@ export class NavbarComponent implements OnInit {
   version: string;
   @Output() sidenavToggle = new EventEmitter<void>();
 
-  get baseUrl(): string {
-    let x = this.router.url;
-    // eslint-disable-next-line no-console
-    console.log(' this.router.url.', x);
-    return '';
-  }
-
   constructor(
     private loginService: LoginService,
     private languageService: JhiLanguageService,

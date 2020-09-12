@@ -11,6 +11,7 @@ export class DriverMainComponent implements OnInit {
     { name: 'In-Box', url: '/drivers/tasks' },
     { name: 'Infringements', url: '/drivers/infringements' },
     { name: 'Demerit points', url: '/drivers/demerit' },
+    { name: 'Driver Information', url: '/drivers/info' },
   ];
   activeLink = this.links[0];
 

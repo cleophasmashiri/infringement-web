@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -9,6 +9,9 @@ import { IInfringement } from 'app/shared/model/infringement.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { InfringementService } from './infringement.service';
 import { InfringementDeleteDialogComponent } from './infringement-delete-dialog.component';
+import { Observable } from 'rxjs/internal/Observable';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-infringement',
@@ -25,8 +28,10 @@ export class InfringementComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'processInstanceId', 'infringementType', 'dateDone', 'doneBy', 'driver', 'vehicle', 'actions'];
   isShowViewMode = false;
   infringement: IInfringement | null = null;
+  account$?: Observable<Account | null>;
 
   constructor(
+    private accountService: AccountService,
     protected infringementService: InfringementService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
@@ -42,6 +47,16 @@ export class InfringementComponent implements OnInit, OnDestroy {
     this.ascending = true;
   }
 
+  loadByDriverEmail(email: string): void {
+    this.infringementService
+      .queryByDriverEmail(email, {
+        page: this.page,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe((res: HttpResponse<IInfringement[]>) => this.paginateInfringements(res.body, res.headers));
+  }
+
   loadAll(): void {
     this.infringementService
       .query({
@@ -55,7 +70,11 @@ export class InfringementComponent implements OnInit, OnDestroy {
   reset(): void {
     this.page = 0;
     this.infringements = [];
-    this.loadAll();
+    if (this.accountService.isDriverPath) {
+      this.loadByDriverEmail('');
+    } else {
+      this.loadAll();
+    }
   }
 
   loadPage(page: number): void {
@@ -64,7 +83,17 @@ export class InfringementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadAll();
+    if (this.accountService.isDriverPath) {
+      this.account$ = this.accountService.identity();
+      this.account$.subscribe(acc => {
+        if (acc && acc.email) {
+          this.loadByDriverEmail(acc.email);
+        }
+      });
+    } else {
+      this.loadAll();
+    }
+
     this.registerChangeInInfringements();
   }
 

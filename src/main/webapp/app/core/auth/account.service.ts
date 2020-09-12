@@ -77,6 +77,10 @@ export class AccountService {
     return this.authenticationState.asObservable();
   }
 
+  get isDriverPath(): boolean {
+    return this.router.url.startsWith('/drivers');
+  }
+
   getImageUrl(): string {
     return this.userIdentity ? this.userIdentity.imageUrl : '';
   }

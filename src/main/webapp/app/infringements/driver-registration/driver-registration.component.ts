@@ -1,8 +1,10 @@
-import { Component, AfterViewInit, ViewChild, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { RegisterService } from 'app/account/register/register.service';
-import { DriverUpdateComponent } from '../entities/driver/driver-update.component';
-import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Driver, IDriver } from 'app/shared/model/driver.model';
+import { DriverService } from '../entities/driver/driver.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-driver-registration',
@@ -14,16 +16,18 @@ export class DriverRegistrationComponent implements OnDestroy, OnInit {
   newDriverRegisteredSubscription: Subscription;
 
   background: any = undefined;
-  links = [
-    { name: 'Register User', url: '/driver-registration/user' },
-    { name: 'Driver Information', url: '/driver-registration/info' },
-  ];
+  links = [{ name: 'Register User', url: '/driver-registration/user' }];
   activeLink = this.links[0];
 
-  constructor(private registerService: RegisterService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private driverService: DriverService,
+    private registerService: RegisterService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.newUserRegisteredSubscription = this.registerService.newUserRegistered.subscribe(driveremail => {
       this.driverEmail = driveremail;
-      this.router.navigate(['/driver-registration/info'], { queryParams: { driveremail } });
+      this.createDriver(driveremail);
     });
     this.newDriverRegisteredSubscription = this.registerService.newDriverRegistered.subscribe(() => {
       const redirecturl = 'drivers';
@@ -32,9 +36,21 @@ export class DriverRegistrationComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    // eslint-disable-next-line no-console
-    console.log(' this.activatedRoute.fragment', this.activatedRoute.fragment);
     this.activatedRoute.queryParams.subscribe(parms => (this.driverEmail = parms['driveremail']));
+  }
+
+  createDriver(email: string): void {
+    const driver = new Driver();
+    driver.email = email;
+    this.subscribeToSaveResponse(this.driverService.create(driver), true);
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IDriver>>, isNew: boolean): void {
+    result.subscribe(() => this.onSaveSuccess(isNew));
+  }
+
+  protected onSaveSuccess(isNew: boolean): void {
+    this.registerService.newDriverRegistered.next();
   }
 
   ngOnDestroy(): void {

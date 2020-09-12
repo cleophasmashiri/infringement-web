@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { IDriver, Driver } from 'app/shared/model/driver.model';
 import { DriverService } from './driver.service';
 import { RegisterService } from 'app/account/register/register.service';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-driver-update',
@@ -50,6 +51,7 @@ export class DriverUpdateComponent implements OnInit {
   }
 
   constructor(
+    private accountService: AccountService,
     private registerService: RegisterService,
     protected driverService: DriverService,
     protected activatedRoute: ActivatedRoute,
@@ -67,12 +69,26 @@ export class DriverUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.driver) {
-      this.updateForm(this.driver);
+    if (this.accountService.isDriverPath) {
+      this.accountService.identity().subscribe(acc => {
+        if (acc && acc.email) {
+          this.driverService.findByEmail(acc?.email).subscribe((res: any) => {
+            if (res) {
+              this.updateDriver(res);
+            }
+          });
+        }
+      });
+    } else {
+      if (this.driver) {
+        this.updateForm(this.driver);
+      } else {
+        this.activatedRoute.data.subscribe(({ driver }) => {
+          this.updateForm(driver);
+        });
+      }
     }
-    this.activatedRoute.data.subscribe(({ driver }) => {
-      this.updateForm(driver);
-    });
+
     this.activatedRoute.queryParams.subscribe(param => {
       if (param && param['driveremail']) {
         this.driverEmail = param['driveremail'];

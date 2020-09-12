@@ -27,6 +27,10 @@ export class DriverService {
     return this.http.get<IDriver>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByEmail(email: string): Observable<EntityResponseType> {
+    return this.http.get<IDriver>(`${this.resourceUrl}/email?email=${email}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IDriver[]>(this.resourceUrl, { params: options, observe: 'response' });
