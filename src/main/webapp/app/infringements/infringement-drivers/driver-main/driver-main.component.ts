@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-driver-main',
@@ -13,9 +14,12 @@ export class DriverMainComponent implements OnInit {
     { name: 'Demerit points', url: '/drivers/demerit' },
     { name: 'Driver Information', url: '/drivers/info' },
   ];
-  activeLink = this.links[0];
 
-  constructor() {}
+  get currentUrl(): string {
+    return this.router.url;
+  }
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 }

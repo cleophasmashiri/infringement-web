@@ -8,7 +8,6 @@ export class InfringementSchema {
     public trafficAdminSelects: string,
     public driverNotes: string,
     public adminNotes: string,
-    public driverIdNumber: string,
     public image1: string
   ) {}
 }

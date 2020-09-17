@@ -13,7 +13,7 @@ import { HttpResponse } from '@angular/common/http';
 export class DriverRegistrationComponent implements OnDestroy, OnInit {
   driverEmail?: string;
   newUserRegisteredSubscription: Subscription;
-  newDriverRegisteredSubscription: Subscription;
+  // newDriverRegisteredSubscription: Subscription;
 
   background: any = undefined;
   links = [{ name: 'Register User', url: '/driver-registration/user' }];
@@ -27,12 +27,12 @@ export class DriverRegistrationComponent implements OnDestroy, OnInit {
   ) {
     this.newUserRegisteredSubscription = this.registerService.newUserRegistered.subscribe(driveremail => {
       this.driverEmail = driveremail;
-      this.createDriver(driveremail);
+      // this.createDriver(driveremail);
     });
-    this.newDriverRegisteredSubscription = this.registerService.newDriverRegistered.subscribe(() => {
-      const redirecturl = 'drivers';
-      this.router.navigate(['/account/login'], { queryParams: { redirecturl } });
-    });
+    // this.newDriverRegisteredSubscription = this.registerService.newDriverRegistered.subscribe(() => {
+    //   const redirecturl = 'drivers';
+    //   this.router.navigate(['/account/login'], { queryParams: { redirecturl } });
+    // });
   }
 
   ngOnInit(): void {
@@ -57,8 +57,8 @@ export class DriverRegistrationComponent implements OnDestroy, OnInit {
     if (this.newUserRegisteredSubscription) {
       this.newUserRegisteredSubscription.unsubscribe();
     }
-    if (this.newDriverRegisteredSubscription) {
-      this.newDriverRegisteredSubscription.unsubscribe();
-    }
+    // if (this.newDriverRegisteredSubscription) {
+    //   this.newDriverRegisteredSubscription.unsubscribe();
+    // }
   }
 }

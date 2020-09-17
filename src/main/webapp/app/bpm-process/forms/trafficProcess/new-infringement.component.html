@@ -5,16 +5,11 @@
         </mat-card-header>
         <mat-card-content>
             <div [hidden]="submitted">
-                <form fxFlex="100" fxFlex.gt-sm="40" fxLayout="column" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
+                <form fxFlex.lt-md="100" fxFlex="50" fxLayout="column" fxLayoutGap="10px" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
                     <mat-form-field>
                         <input name="plateNumber" ngModel type="text" matInput placeholder="Enter Plate Number"  [(ngModel)]="model.plateNumber"
                             required #plateNumber="ngModel">
                         <mat-error *ngIf="plateNumber.hasError('required')">Plate Number Required</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input name="driverIdNumber" ngModel type="text" matInput placeholder="Enter Driver ID Number"  [(ngModel)]="model.driverIdNumber"
-                            required #driverIdNumber="ngModel">
-                        <mat-error *ngIf="driverIdNumber.hasError('required')">Driver ID Number Required</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Infringement Type</mat-label>
@@ -34,9 +29,10 @@
                         <label for="image1">Image 1</label>
                         <input (change)="handleFileInput($event.target.files)" name="image1" type="file" placeholder="Upload Image" required>
                     </div> -->
-                  
+                  <div>
                     <button type="submit" mat-raised-button color="primary"
-                        [disabled]="!startNewProcess.form.valid">Submit</button>
+                    [disabled]="!startNewProcess.form.valid">Submit</button>
+                  </div>                 
                 </form>
             </div>
             <div [hidden]="!submitted">

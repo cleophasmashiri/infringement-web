@@ -16,7 +16,7 @@ import { AccountService } from 'app/core/auth/account.service';
 })
 export class DriverUpdateComponent implements OnInit {
   isSaving = false;
-
+  success = false;
   @Input()
   driverEmail = '';
 
@@ -72,11 +72,21 @@ export class DriverUpdateComponent implements OnInit {
     if (this.accountService.isDriverPath) {
       this.accountService.identity().subscribe(acc => {
         if (acc && acc.email) {
-          this.driverService.findByEmail(acc?.email).subscribe((res: any) => {
-            if (res) {
-              this.updateDriver(res);
+          this.driverService.findByEmail(acc?.email).subscribe(
+            (res: any) => {
+              if (res && res.body) {
+                this.updateDriver(res.body);
+              }
+            },
+            error => {
+              if (error && error.status && error.status === 404) {
+                this.driverEmail = acc.email;
+                this.driver = new Driver();
+                this.driver.email = acc.email;
+                this.updateForm(this.driver);
+              }
             }
-          });
+          );
         }
       });
     } else {
@@ -160,9 +170,11 @@ export class DriverUpdateComponent implements OnInit {
     this.isSaving = false;
     this.driverCreated.emit('');
     this.previousState();
+    this.success = true;
   }
 
   protected onSaveError(): void {
     this.isSaving = false;
+    this.success = false;
   }
 }

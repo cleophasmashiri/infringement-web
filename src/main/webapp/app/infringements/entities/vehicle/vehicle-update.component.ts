@@ -3,11 +3,12 @@ import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { iif, Observable } from 'rxjs';
 import { IVehicle, Vehicle } from 'app/shared/model/vehicle.model';
 import { VehicleService } from './vehicle.service';
 import { IDriver } from 'app/shared/model/driver.model';
 import { DriverService } from '../driver/driver.service';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-vehicle-update',
@@ -40,10 +41,11 @@ export class VehicleUpdateComponent implements OnInit {
     chassisNumber: [],
     color: [],
     yearFirstRegistered: [],
-    driver: [],
+    driver: [Validators.required],
   });
 
   constructor(
+    protected accountService: AccountService,
     protected vehicleService: VehicleService,
     protected driverService: DriverService,
     protected activatedRoute: ActivatedRoute,
@@ -51,11 +53,14 @@ export class VehicleUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ vehicle }) => {
-      this.updateForm(vehicle);
-
+    if (this.accountService.isAdminsPath) {
       this.driverService.query().subscribe((res: HttpResponse<IDriver[]>) => (this.drivers = res.body || []));
-    });
+    } else {
+      this.activatedRoute.data.subscribe(({ vehicle }) => {
+        this.updateForm(vehicle);
+        this.driverService.query().subscribe((res: HttpResponse<IDriver[]>) => (this.drivers = res.body || []));
+      });
+    }
   }
 
   updateVehicle(vehicle: IVehicle): void {
@@ -69,26 +74,28 @@ export class VehicleUpdateComponent implements OnInit {
   }
 
   updateForm(vehicle: IVehicle): void {
-    this.editForm.patchValue({
-      id: vehicle.id,
-      plateNumber: vehicle.plateNumber,
-      make: vehicle.make,
-      model: vehicle.model,
-      engineNumber: vehicle.engineNumber,
-      chassisNumber: vehicle.chassisNumber,
-      color: vehicle.color,
-      yearFirstRegistered: vehicle.yearFirstRegistered,
-      driver: vehicle.driver,
-    });
+    if (vehicle) {
+      this.editForm.patchValue({
+        id: vehicle.id,
+        plateNumber: vehicle.plateNumber,
+        make: vehicle.make,
+        model: vehicle.model,
+        engineNumber: vehicle.engineNumber,
+        chassisNumber: vehicle.chassisNumber,
+        color: vehicle.color,
+        yearFirstRegistered: vehicle.yearFirstRegistered,
+        driver: vehicle.driver,
+      });
+    }
   }
 
   save(): void {
     this.isSaving = true;
     const vehicle = this.createFromForm();
-    if (vehicle.id !== undefined) {
-      this.subscribeToSaveResponse(this.vehicleService.update(vehicle));
-    } else {
+    if (vehicle.id === undefined || vehicle.id === null) {
       this.subscribeToSaveResponse(this.vehicleService.create(vehicle));
+    } else {
+      this.subscribeToSaveResponse(this.vehicleService.update(vehicle));
     }
   }
 

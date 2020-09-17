@@ -1,6 +1,10 @@
 
 <div class="row justify-content-center">
     <div class="col-8">
+
+        <div class="alert alert-danger" *ngIf="success" jhiTranslate="register.messages.error.emailexists">
+            <strong>Driver Information Saved!</strong>
+        </div>
         <form fxFlex.lt-md="100" fxFlex="50" fxLayout="column" fxLayoutGap="10px" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-driver-heading" jhiTranslate="infringementwebApp.driver.home.createOrEditLabel">Create or edit a
                 Driver</h2>
@@ -22,7 +26,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input class="form-control" type="text" matInput placeholder="Your email" [value]="driverEmail" formControlName="email" readonly>
-                    <span>{{ driverEmail }}</span>
+                    <!-- <span>{{ driverEmail }}</span> -->
                 </mat-form-field>
                 <mat-form-field>
                     <input class="form-control" type="text" matInput placeholder="Your National Id Number" formControlName="nationalIdNumber">

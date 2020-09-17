@@ -12,7 +12,7 @@ import { InfringementTypeSchema } from 'app/bpm-process/schemas/infringement-typ
 })
 export class TrafficAdminInfringementComponent extends CompleteTaskComponent {
   submitted = false;
-  model = new InfringementSchema('', InfringementTypeSchema.Other, '', '', '', '', '', '', '');
+  model = new InfringementSchema('', InfringementTypeSchema.Other, '', '', '', '', '', '');
   adminChoices = [
     { name: 'Cancel Infringement', value: 'Cancel' },
     { name: 'Assign Another Driver', value: 'Assign Another Driver' },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CamundaRestService } from '../../camunda-rest.service';
 import { StartProcessInstanceComponent } from '../general/start-process-instance.component';
 import { InfringementSchema } from 'app/bpm-process/schemas/infringement.schema';
@@ -12,9 +12,9 @@ import { InfringementTypeSchema } from 'app/bpm-process/schemas/infringement-typ
 })
 export class NewInfringementComponent extends StartProcessInstanceComponent {
   submitted = false;
-  model = new InfringementSchema('', InfringementTypeSchema.Other, '', '', '', '', '', '', '');
-  private fileToUpload?: File;
-  private SUCCESS = false;
+  model = new InfringementSchema('', InfringementTypeSchema.Other, '', '', '', '', '', '');
+  // private fileToUpload?: File;
+  // private SUCCESS = false;
   infringmentTypes = [
     { value: 'Other', name: 'Other' },
     { value: 'OverSpeeding', name: 'Over-Speeding' },
@@ -27,19 +27,21 @@ export class NewInfringementComponent extends StartProcessInstanceComponent {
   route: ActivatedRoute;
   camundaRestService: CamundaRestService;
 
-  constructor(route: ActivatedRoute, camundaRestService: CamundaRestService) {
+  constructor(route: ActivatedRoute, camundaRestService: CamundaRestService, private routerNav: Router) {
     super(route, camundaRestService);
     this.route = route;
     this.camundaRestService = camundaRestService;
   }
 
-  onFileComplete(data: any): void {}
+  // onFileComplete(data: any): void {}
 
   onSubmit(): void {
     this.route.params.subscribe(params => {
       const processDefinitionKey = params.processdefinitionkey;
       const variables = this.generateVariablesFromFormFields();
-      this.camundaRestService.postProcessInstance(processDefinitionKey, variables).subscribe();
+      this.camundaRestService.postProcessInstance(processDefinitionKey, variables).subscribe(() => {
+        this.routerNav.navigate(['staff/infringements/tasks']);
+      });
       this.submitted = true;
     });
   }
@@ -68,8 +70,8 @@ export class NewInfringementComponent extends StartProcessInstanceComponent {
     });
 
   handleFileInput(files: any): void {
-    this.fileToUpload = files.item(0);
-    this.uploadFileToActivity();
+    // this.fileToUpload = files.item(0);
+    // this.uploadFileToActivity();
   }
   // TODO must resolve file upload
   uploadFileToActivity(): void {

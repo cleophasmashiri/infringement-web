@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '@angular/router';
-import { infringementsRoutes } from 'app/infringements/infringementsRoutes';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-main-admins',
@@ -16,12 +15,13 @@ export class MainAdminsComponent implements OnInit {
     { name: 'Vehicles', url: '/staff/infringements/vehicles' },
   ];
   routes?: Route[] = [];
-  activeLink = this.links[0];
   background: any = undefined;
 
-  constructor() {}
-
-  ngOnInit(): void {
-    //this.routes = infringementsRoutes[0].children;
+  get currentUrl(): string {
+    return this.router.url;
   }
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {}
 }

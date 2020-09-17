@@ -12,7 +12,7 @@ import { InfringementTypeSchema } from 'app/bpm-process/schemas/infringement-typ
 })
 export class DriverInfringementComponent extends CompleteTaskComponent {
   submitted = false;
-  model = new InfringementSchema('', InfringementTypeSchema.Other, '', '', '', '', '', '', '');
+  model = new InfringementSchema('', InfringementTypeSchema.Other, '', '', '', '', '', '');
   driverChoices = [
     { name: 'Nominate Another Driver/Make Representation/Go To Court', value: 'other' },
     { name: 'Submit Proof Of Payment', value: 'Pay' },

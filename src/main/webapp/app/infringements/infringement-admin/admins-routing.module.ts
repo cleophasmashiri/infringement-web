@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Injectable, NgModule } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterModule, Routes } from '@angular/router';
 import { MainAdminsComponent } from './main-admins/main-admins.component';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { TaskViewComponent } from 'app/bpm-process/task-view/task-view.component';
@@ -8,6 +8,8 @@ import { InfringementComponent } from '../entities/infringement/infringement.com
 import { DriverComponent } from '../entities/driver/driver.component';
 import { VehicleComponent } from '../entities/vehicle/vehicle.component';
 import { TasklistComponent } from 'app/bpm-process/tasklist/tasklist.component';
+import { DriverResolve } from '../entities/driver/driver.route';
+import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 
 const routes: Routes = [
   {
@@ -28,7 +30,18 @@ const routes: Routes = [
       { path: 'startprocess/:processdefinitionkey', component: StartProcessComponent },
       { path: 'list', component: InfringementComponent },
       { path: 'drivers', component: DriverComponent },
-      { path: 'vehicles', component: VehicleComponent },
+      {
+        path: 'vehicles',
+        component: VehicleComponent,
+        resolve: {
+          driver: DriverResolve,
+        },
+        data: {
+          authorities: [Authority.USER],
+          pageTitle: 'infringementwebApp.vehicle.home.title',
+        },
+        canActivate: [UserRouteAccessService],
+      },
     ],
   },
 ];

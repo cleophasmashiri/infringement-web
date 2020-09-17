@@ -81,6 +81,10 @@ export class AccountService {
     return this.router.url.startsWith('/drivers');
   }
 
+  get isAdminsPath(): boolean {
+    return this.router.url.startsWith('/staff');
+  }
+
   getImageUrl(): string {
     return this.userIdentity ? this.userIdentity.imageUrl : '';
   }

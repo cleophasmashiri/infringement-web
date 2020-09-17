@@ -70,7 +70,9 @@ export class VehicleComponent implements OnInit, OnDestroy {
     this.isShowEditMode = true;
     this.isShowViewMode = false;
     this.vehicle = vehicle;
-    this.vehicleUpdateComponent.updateVehicle(vehicle);
+    if (this.vehicleUpdateComponent) {
+      this.vehicleUpdateComponent.updateVehicle(vehicle);
+    }
   }
   showViewMode(vehicle: IVehicle): void {
     this.isShowEditMode = false;

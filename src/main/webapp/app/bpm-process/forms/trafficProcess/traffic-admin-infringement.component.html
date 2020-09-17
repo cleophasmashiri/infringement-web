@@ -6,13 +6,12 @@
         <mat-card-content>
             <div [hidden]="submitted">
                 <mat-list>
-                    <mat-list-item> Driver Id Number: <span>{{ model.driverIdNumber }}</span></mat-list-item>
                     <mat-list-item> Plate Number: <span>{{ model.plateNumber }}</span></mat-list-item>
                     <mat-list-item> Infringement Type: <span>{{ model.infringementType }}</span></mat-list-item>
                     <mat-list-item> Infringement Notes: <span>{{ model.infringementNotes }}</span></mat-list-item>
                     <mat-list-item> Driver Notes: <span>{{ model.driverNotes }}</span></mat-list-item>
                    </mat-list>
-                <form fxLayout="column" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
+                <form fxFlex.lt-md="100" fxFlex="50" fxLayout="column" fxLayoutGap="10px" #startNewProcess="ngForm" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="fill">
                         <mat-label>Admin Choice</mat-label>
                         <mat-select [(ngModel)]="model.trafficAdminSelects" name="trafficAdminSelects">
