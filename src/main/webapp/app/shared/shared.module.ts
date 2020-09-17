@@ -6,10 +6,20 @@ import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { JhMaterialModule } from 'app/jh-material.module';
+import { SpinnerOverlayComponent } from './spinner-overlay/spinner-overlay.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from './spinner-interceptor';
 
 @NgModule({
   imports: [InfringementwebSharedLibsModule, JhMaterialModule],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective],
+  declarations: [
+    FindLanguageFromKeyPipe,
+    AlertComponent,
+    AlertErrorComponent,
+    LoginModalComponent,
+    HasAnyAuthorityDirective,
+    SpinnerOverlayComponent,
+  ],
   entryComponents: [LoginModalComponent],
   exports: [
     InfringementwebSharedLibsModule,
@@ -18,7 +28,14 @@ import { JhMaterialModule } from 'app/jh-material.module';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
-    JhMaterialModule
+    JhMaterialModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true,
+    },
   ],
 })
 export class InfringementwebSharedModule {}
