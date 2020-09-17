@@ -18,14 +18,14 @@
                 <mat-form-field>
                     <input class="form-control" type="text" matInput placeholder="Your username"
                         formControlName="username">
-                    <mat-hint>Please enter a valid username.</mat-hint>
-                    <mat-error>Missing username.</mat-error>
+                    <mat-hint class="mat-hint">Please enter a valid username.</mat-hint>
+                    <mat-error class="mat-error">Missing username.</mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <input class="form-control" type="password" matInput placeholder="Your password"
                         formControlName="password">
-                    <mat-hint>Please enter your password.</mat-hint>
-                    <mat-error>Missing password.</mat-error>
+                    <mat-hint class="mat-hint">Please enter your password.</mat-hint>
+                    <mat-error class="mat-error">Missing password.</mat-error>
                 </mat-form-field>
                 <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
             </form>

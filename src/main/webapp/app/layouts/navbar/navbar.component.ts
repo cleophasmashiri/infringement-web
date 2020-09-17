@@ -24,6 +24,14 @@ export class NavbarComponent implements OnInit {
   version: string;
   @Output() sidenavToggle = new EventEmitter<void>();
 
+  get infringementsText(): string {
+    if (this.router.url.startsWith('/staff')) {
+      return 'Manage Infringements';
+    } else {
+      return 'My Infringements';
+    }
+  }
+
   constructor(
     private loginService: LoginService,
     private languageService: JhiLanguageService,

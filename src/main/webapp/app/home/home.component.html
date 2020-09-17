@@ -1,4 +1,4 @@
-<div id="heading" class="section mat-typography" [ngStyle.lt-md]="{'margin-top': '30px', 'margin-bottom': '30px'}">
+<div id="heading" class="home section mat-typography" [ngStyle.lt-md]="{'margin-top': '30px', 'margin-bottom': '30px'}">
     <div class="container">
         <div class="heading-section" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20">
             <div [class.animated]="isHeading" [class.fadeInLeft]="isHeading">
@@ -13,9 +13,8 @@
             </div>
             <div fxLayout="row" [class.animated]="isHeadingBtn" [class.fadeIn]="isHeadingBtn"
                 [class.heading-btn]="isHeadingBtn">
-                <a routerLink="drivers" class="heading-button-left" mat-flat-button color="accent">View
-                    Infringements</a>
-                <a class="heading-button-right" mat-stroked-button color="accent">Download App</a>
+                <a routerLink="drivers" class="heading-button-left" mat-flat-button color="primary">My Infringements</a>
+                <a class="heading-button-right" mat-stroked-button color="primary">Download App</a>
             </div>
         </div>
     </div>

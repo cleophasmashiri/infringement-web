@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
-import { Task } from 'app/bpm-process/schemas/task.model';
 
 @Component({
   selector: 'jhi-home',

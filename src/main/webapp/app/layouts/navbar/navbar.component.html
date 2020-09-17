@@ -22,7 +22,7 @@
             </button>
         </li>
         <li *ngIf="isAuthenticated()">
-          <button mat-button (click)="navigateToInfringements()">Infringements</button>
+          <button mat-button (click)="navigateToInfringements()">{{ infringementsText }}</button>
         </li>
         <li *ngIf="isAuthenticated()">
           <button mat-button style="cursor: pointer" (click)="logout()">Logout</button>
