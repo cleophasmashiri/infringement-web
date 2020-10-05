@@ -14,7 +14,6 @@ export class DriverMainComponent implements OnInit {
     { name: 'Demerit points', url: '/drivers/demerit' },
     { name: 'Driver Information', url: '/drivers/info' },
   ];
-
   get currentUrl(): string {
     return this.router.url;
   }

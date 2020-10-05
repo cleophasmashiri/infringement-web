@@ -20,7 +20,11 @@ export class CompleteTaskComponent {
       const variables = this.generateVariablesFromFormFields();
       this.camundaRestService.postCompleteTask(taskId, variables).subscribe();
       this.submitted = true;
-      this.router.navigate(['/tasklist']);
+      if (this.router.url.startsWith('/staff')) {
+        this.router.navigate(['staff/infringements/tasks']);
+      } else {
+        this.router.navigate(['drivers/tasks']);
+      }
     });
   }
 

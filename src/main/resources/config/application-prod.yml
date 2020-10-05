@@ -53,8 +53,8 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: smtp.gmail.com
-    port: 587
+    host: ${HEROKU_EMAIL_SMTP_URL}
+    port: ${HEROKU_EMAIL_SMTP_PORT}
     username: ${HEROKU_EMAIL_USERNAME} # gmailuserid@gmail.com  #Replace this field with your Gmail username.
     password: ${HEROKU_EMAIL_PASSWORD} #Replace this field with your Gmail password/App password.
     protocol: smtp
@@ -62,7 +62,7 @@ spring:
     properties.mail.smtp:
       auth: true
       starttls.enable: true
-      ssl.trust: smtp.gmail.com
+      ssl.trust: ${HEROKU_EMAIL_SMTP_URL}
   thymeleaf:
     cache: true
   sleuth:

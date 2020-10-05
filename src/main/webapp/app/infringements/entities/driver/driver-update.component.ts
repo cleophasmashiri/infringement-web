@@ -102,8 +102,6 @@ export class DriverUpdateComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(param => {
       if (param && param['driveremail']) {
         this.driverEmail = param['driveremail'];
-        // eslint-disable-next-line no-console
-        console.log('driverEmail', this.driverEmail);
       }
     });
   }
@@ -146,7 +144,7 @@ export class DriverUpdateComponent implements OnInit {
       firstName: this.editForm.get(['firstName'])!.value,
       lastName: this.editForm.get(['lastName'])!.value,
       middleName: this.editForm.get(['middleName'])!.value,
-      email: this.driverEmail,
+      email: this.editForm.get(['email'])!.value,
       nationalIdNumber: this.editForm.get(['nationalIdNumber'])!.value,
       cellNumber: this.editForm.get(['cellNumber'])!.value,
       province: this.editForm.get(['province'])!.value,

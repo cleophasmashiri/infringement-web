@@ -1,5 +1,5 @@
-import { Injectable, NgModule } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { MainAdminsComponent } from './main-admins/main-admins.component';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { TaskViewComponent } from 'app/bpm-process/task-view/task-view.component';
@@ -15,21 +15,52 @@ const routes: Routes = [
   {
     path: '',
     component: MainAdminsComponent,
-    data: {
-      authorities: [Authority.INFRINGEMENT_ADMIN],
-      pageTitle: 'infringementwebApp.infringements.admins.title',
-    },
     children: [
       {
         path: '',
         redirectTo: 'tasks',
         pathMatch: 'full',
       },
-      { path: 'tasks', component: TasklistComponent },
-      { path: 'tasks/:id', component: TaskViewComponent },
-      { path: 'startprocess/:processdefinitionkey', component: StartProcessComponent },
-      { path: 'list', component: InfringementComponent },
-      { path: 'drivers', component: DriverComponent },
+      {
+        path: 'tasks',
+        component: TasklistComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'tasks/:id',
+        component: TaskViewComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'startprocess/:processdefinitionkey',
+        component: StartProcessComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'list',
+        component: InfringementComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'drivers',
+        component: DriverComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
       {
         path: 'vehicles',
         component: VehicleComponent,
@@ -40,7 +71,6 @@ const routes: Routes = [
           authorities: [Authority.USER],
           pageTitle: 'infringementwebApp.vehicle.home.title',
         },
-        canActivate: [UserRouteAccessService],
       },
     ],
   },

@@ -5,6 +5,8 @@ import { DriverDemeritComponent } from './driver-demerit/driver-demerit.componen
 import { TasklistComponent } from 'app/bpm-process/tasklist/tasklist.component';
 import { InfringementComponent } from '../entities/infringement/infringement.component';
 import { DriverUpdateComponent } from '../entities/driver/driver-update.component';
+import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { Authority } from 'app/shared/constants/authority.constants';
 
 export const driversRoutes: Routes = [
   {
@@ -16,11 +18,46 @@ export const driversRoutes: Routes = [
         redirectTo: 'tasks',
         pathMatch: 'full',
       },
-      { path: 'tasks', component: TasklistComponent },
-      { path: 'tasks/:id', component: TaskViewComponent },
-      { path: 'infringements', component: InfringementComponent },
-      { path: 'demerit', component: DriverDemeritComponent },
-      { path: 'info', component: DriverUpdateComponent },
+      {
+        path: 'tasks',
+        component: TasklistComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'tasks/:id',
+        component: TaskViewComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'infringements',
+        component: InfringementComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'demerit',
+        component: DriverDemeritComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
+      {
+        path: 'info',
+        component: DriverUpdateComponent,
+        canActivate: [UserRouteAccessService],
+        data: {
+          authorities: [Authority.USER],
+        },
+      },
     ],
   },
 ];

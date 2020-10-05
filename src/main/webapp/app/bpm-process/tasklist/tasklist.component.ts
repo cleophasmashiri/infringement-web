@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../schemas/task.model';
 import { CamundaRestService } from '../camunda-rest.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'app/core/auth/account.service';
 import { Observable } from 'rxjs';
 import { Account } from 'app/core/user/account.model';
@@ -17,9 +17,14 @@ export class TasklistComponent implements OnInit {
   formKey?: string;
   isShowTaskView = false;
   account$?: Observable<Account | null>;
-  displayedColumns: string[] = ['name', 'assignee', 'created'];
+  displayedColumns: string[] = ['name', 'assignee', 'created', 'viewActions'];
 
-  constructor(private accountService: AccountService, private camundaRestService: CamundaRestService, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    private camundaRestService: CamundaRestService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.account$ = this.accountService.identity();
@@ -39,8 +44,12 @@ export class TasklistComponent implements OnInit {
     });
   }
 
-  showTaskView(): void {
-    this.isShowTaskView = !this.isShowTaskView;
+  showTaskView(taskId: string): void {
+    if (this.router.url.startsWith('/staff')) {
+      this.router.navigate(['staff/infringements/tasks/' + taskId]);
+    } else {
+      this.router.navigate(['drivers/tasks/' + taskId]);
+    }
   }
 
   getFormKey(): void {

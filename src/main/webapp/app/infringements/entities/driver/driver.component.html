@@ -75,10 +75,10 @@
         </mat-table>
     </div>
 </div>
-<div *ngIf="isShowViewMode">
+<div [hidden]="!isShowViewMode">
   selector: 'jhi-driver-detail',
     <jhi-driver-detail [driver]="driver" (goBackToList)="goBackToListHandler()"></jhi-driver-detail>
 </div>
-<div *ngIf="isShowEditMode">
+<div [hidden]="!isShowEditMode">
     <jhi-driver-update [driver]="driver" (goBackToList)="goBackToListHandler()"></jhi-driver-update>
 </div>

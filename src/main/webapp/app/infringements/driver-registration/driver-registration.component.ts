@@ -29,10 +29,6 @@ export class DriverRegistrationComponent implements OnDestroy, OnInit {
       this.driverEmail = driveremail;
       // this.createDriver(driveremail);
     });
-    // this.newDriverRegisteredSubscription = this.registerService.newDriverRegistered.subscribe(() => {
-    //   const redirecturl = 'drivers';
-    //   this.router.navigate(['/account/login'], { queryParams: { redirecturl } });
-    // });
   }
 
   ngOnInit(): void {

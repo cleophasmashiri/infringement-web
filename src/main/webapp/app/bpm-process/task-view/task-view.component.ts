@@ -15,9 +15,12 @@ export class TaskViewComponent implements OnInit {
   constructor(private camundaRestService: CamundaRestService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    if (this.taskId) {
-      this.getFormKey();
-    }
+    this.route.params.subscribe(param => {
+      if (param && param.id) {
+        this.taskId = param.id;
+        this.getFormKey();
+      }
+    });
   }
 
   getFormKey(): void {
