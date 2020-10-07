@@ -190,7 +190,7 @@ jhipster:
     allow-credentials: true
     max-age: 1800
   mail:
-    from: infringementweb@localhost
+    from: ${HEROKU_EMAIL_SMTP_FROM}
   swagger:
     default-include-pattern: /api/.*
     title: infringementweb API
