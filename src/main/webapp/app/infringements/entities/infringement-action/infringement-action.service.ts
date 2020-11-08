@@ -37,6 +37,16 @@ export class InfringementActionService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  queryByDriverIdAndInfringementActionType(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IInfringementAction[]>(`${this.resourceUrl}/driverId/${req.driverId}/infringementActionType/${req.infringementActionType}`, {
+        params: options,
+        observe: 'response',
+      })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

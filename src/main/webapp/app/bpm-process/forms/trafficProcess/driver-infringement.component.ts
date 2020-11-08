@@ -14,9 +14,11 @@ export class DriverInfringementComponent extends CompleteTaskComponent {
   submitted = false;
   model = new InfringementSchema('', InfringementTypeSchema.Other, '', '', '', '', '', '');
   driverChoices = [
-    { name: 'Nominate Another Driver/Make Representation/Go To Court', value: 'other' },
     { name: 'Submit Proof Of Payment', value: 'Pay' },
-  ];
+    { name: 'Nominate Another Driver', value: 'Nominate Another Driver' },
+    { name: 'Make Representation', value: 'Make Representation' },
+    { name: 'Go To Court', value: 'Go To Court' },
+  ]; //Create/View Demerit Points
 
   constructor(route: ActivatedRoute, router: Router, camundaRestService: CamundaRestService) {
     super(route, router, camundaRestService);

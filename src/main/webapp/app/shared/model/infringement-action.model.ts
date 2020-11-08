@@ -10,6 +10,8 @@ export interface IInfringementAction {
   dateDone?: Moment;
   doneBy?: string;
   infringement?: IInfringement;
+  amount?: number;
+  points?: number;
 }
 
 export class InfringementAction implements IInfringementAction {
@@ -20,6 +22,8 @@ export class InfringementAction implements IInfringementAction {
     public infringementActionType?: InfringementActionType,
     public dateDone?: Moment,
     public doneBy?: string,
-    public infringement?: IInfringement
+    public infringement?: IInfringement,
+    public amount?: number,
+    public points?: number
   ) {}
 }

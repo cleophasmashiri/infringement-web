@@ -12,6 +12,7 @@ export class DriverMainComponent implements OnInit {
     { name: 'In-Box', url: '/drivers/tasks' },
     { name: 'Infringements', url: '/drivers/infringements' },
     { name: 'Demerit points', url: '/drivers/demerit' },
+    { name: 'My Fines', url: '/drivers/fines' },
     { name: 'Driver Information', url: '/drivers/info' },
   ];
   get currentUrl(): string {
