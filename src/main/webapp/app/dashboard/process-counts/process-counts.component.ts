@@ -12,25 +12,29 @@ export class ProcessCountsComponent implements OnInit {
   reviewDriverInfrigement = 0;
 
   items = [
-    { title: 'All Infringements', icon: 'clear_all', count: this.allCounts, activityId: '' },
-    { title: 'Awaiting Driver Tasks', icon: 'face', count: this.allDriverNominationsCounts, activityId: 'driverNominations' },
-    { title: 'Awaiting Admin Tasks', icon: 'gavel', count: this.reviewDriverInfrigement, activityId: 'reviewDriverInfrigement' },
+    { title: 'All Infringements', icon: 'clear_all', count: 0, activityId: '' },
+    { title: 'Awaiting Driver Tasks', icon: 'face', count: 0, activityId: 'driverNominations' },
+    { title: 'Awaiting Admin Tasks', icon: 'gavel', count: 0, activityId: 'reviewDriverInfrigement' },
   ];
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.dashboardService.getInstanceCountsByActivityId('').subscribe(
-      allCounts => (this.items[0].count = allCounts),
-      () => (this.items[0].count = 0)
+      allCounts => {
+        /* eslint-disable no-console */
+        console.log(allCounts);
+        this.items[0].count = allCounts['count'];
+      },
+      () => (this.items[0].count = 10)
     );
     this.dashboardService.getInstanceCountsByActivityId('driverNominations').subscribe(
-      allDriverNominationsCounts => (this.items[1].count = allDriverNominationsCounts),
+      allDriverNominationsCounts => (this.items[1].count = allDriverNominationsCounts['count']),
       () => (this.items[1].count = 0)
     );
     this.dashboardService.getInstanceCountsByActivityId('reviewDriverInfrigement').subscribe(
-      reviewDriverInfrigement => (this.items[2].count = reviewDriverInfrigement),
-      () => (this.items[2].count = 0)
+      reviewDriverInfrigement => (this.items[2].count = reviewDriverInfrigement['count']),
+      () => (this.items[2].count = 20)
     );
   }
 }

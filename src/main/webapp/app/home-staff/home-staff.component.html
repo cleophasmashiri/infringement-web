@@ -1,6 +1,6 @@
-<div id="heading" class="home section mat-typography" [ngStyle.lt-md]="{'margin-top': '30px', 'margin-bottom': '30px'}">
+<div id="heading" class="home section mat-typography" [ngStyle.lt-md]="{'margin-top': '0px', 'margin-bottom': '15px'}">
     <div class="container">
-        <div class="heading-section" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20">
+        <div class="heading-section" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10">
             <div [class.animated]="isHeading" [class.fadeInLeft]="isHeading">
                 <h1 [ngStyle.xs]="{'font-size': '32px'}" [ngStyle.sm]="{'font-size': '42px'}">Administer infringements
                     smartly.</h1>
@@ -10,8 +10,9 @@
                     infringement tickets via your phone, you can also monitor
                     demerit points smartly via your phone by simply installing the infringement app on your
                     phone.</h2>
-                    <!-- <jhi-process-counts></jhi-process-counts> -->
-                    <!-- <jhi-line-chart2></jhi-line-chart2> -->
+            </div>
+            <div fxLayoutAlign="center center">
+                <jhi-process-counts></jhi-process-counts>
             </div>
             <div fxLayout="row" [class.animated]="isHeadingBtn" [class.fadeIn]="isHeadingBtn"
                 [class.heading-btn]="isHeadingBtn">
